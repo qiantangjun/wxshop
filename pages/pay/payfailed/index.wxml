@@ -1,0 +1,6 @@
+<!--pages/pay/payfailed/index.wxml-->
+<view class='container'>
+    <view class="group">
+  <text class='text'>支付失败</text>
+</view>
+</view>

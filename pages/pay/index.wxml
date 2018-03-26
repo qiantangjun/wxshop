@@ -1,0 +1,47 @@
+<!--pages/pay/index.wxml-->
+<view class='contianer'>
+  <text class='userpayt'>购物清单</text>
+  <view class='order-det' wx:for="{{paygoods}}" wx:key="index" wx:for-item="item">
+    <navigator url='../../../details/index?id={{item.goodsId}}'>
+      <image src='{{item.pic}}'></image>
+      <view class='orderpro'>
+        <text class='title'>{{item.title}}</text>
+        <text class='price'>单价:￥{{item.price}} 数量:{{item.number}}</text>
+        <text class='payprice'>￥{{item.price}}</text>
+      </view>
+    </navigator>
+  </view>
+  <view class='orderaddress'>
+    <text class='tetx'>送货时间:</text>
+    <view class='addressinfo'>
+      <text class='name'>不限收货时间</text>
+      <view class='icon'>
+      </view>
+    </view>
+  </view>
+  <view class='orderaddress'>
+    <text class='tetx'>优惠券:</text>
+    <view class='addressinfo'>
+      <text class='name'>暂无优惠券</text>
+      <view class='icon'>
+      </view>
+    </view>
+  </view>
+  <view class='order-price'>
+    <view class='bigprice'>
+      <text class='left'>订单金额:</text>
+      <text class='right'>￥2299</text>
+    </view>
+    <view class='bigprice'>
+      <text class='left'>商品总价:</text>
+      <text class='right'>￥2299</text>
+    </view>
+    <view class='bigprice'>
+      <text class='left'>运费:</text>
+      <text class='right'>￥0.00</text>
+    </view>
+  </view>
+  <view class='paybtn' bindtap='paysuucess'>
+    微信支付
+  </view>
+</view>

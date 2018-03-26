@@ -1,0 +1,7 @@
+<!--pages/message/messtent/index.wxml-->
+<view class='container'>
+  <text class='title'>{{title}}</text>
+  <view class='content'>
+    {{content}}
+  </view>
+</view>

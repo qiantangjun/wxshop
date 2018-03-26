@@ -1,0 +1,9 @@
+<!--pages/pay/paysuccess/index.wxml-->
+<view class='container'>
+    <view class="group">
+  <block wx:for="{{iconSize}}" wx:key="index">
+    <icon type="success" size="{{item}}"/>
+  </block>
+  <text class='text'>支付成功</text>
+</view>
+</view>

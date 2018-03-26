@@ -1,0 +1,13 @@
+<!--pages/message/index.wxml-->
+<view class='container'>
+  <view class='newslist'>
+    <view class='newsbox'>
+      <view class='item' wx:for="{{message}}" wx:key="index" wx:for-item="item">
+        <navigator url='messtent/index?id={{item.id}}'>
+          <text class='title'>{{item.title}}</text>
+          <text class='datatiem'>{{item.dateAdd}}</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>
