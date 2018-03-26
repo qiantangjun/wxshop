@@ -1,0 +1,65 @@
+<!--pages/details/index.wxml-->
+<import src="../wxParse/wxParse.wxml" />
+<view class='container'>
+  <view class='details'>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class='swiper'>
+      <block wx:for="{{detalimg}}" wx:for-item="item" wx:key="index">
+        <swiper-item>
+          <image src="{{item.pic}}" class="slide-image" mode='widthFix' />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='protitle'>
+      <text class='bigtil'>{{bigtitle}}</text>
+      <text class='smalltitle'>{{smalltitle}}</text>
+      <text class='count'></text>
+      <text class='price'>￥{{smallprice}}<text class='htit' wx:if="{{bigprice.length>0}}">￥{{bigprice}}</text></text>
+    </view>
+    <view class='ctil'>已选:{{chosename}}</view>
+    <view class='chosebox' wx:for="{{chose}}" wx:for-item="property" wx:key="property.id" wx:if="{{chose.length>0}}" data-id="{{property.id}}">
+      <text class='ctil'>{{property.name}}</text>
+      <view class='chose'>
+        <view wx:for="{{property.childsCurGoods}}" class="{{item.checked ? 'ck' : ''}}" bindtap="clickSkuValue" wx:for-item="item" wx:key="{{item.id}}" data-value-id="{{item.id}}" data-name-id="{{property.id}}">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+    <view class='numbox'>
+      <text>购买数量:</text>
+      <view class='xm-input-number'>
+        <view class="input-sub {{detailnumber==1? 'disabled' : ''}}" bindtap='cutnumber'>-</view>
+        <input class='inout-num' value='{{detailnumber}}' disabled="true"></input>
+        <view class="input-add {{detailnumber==3? 'disabled' : ''}}" bindtap='addnumber'>+</view>
+      </view>
+    </view>
+    <view class='procontent'>
+      <view class='protab swiper-tab'>
+        <view class="swiper-tab-item {{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">概述</view>
+        <view class="swiper-tab-item {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">评价</view>
+      </view>
+      <view class='imagecontent'>
+        <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+          <swiper-item>
+            <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+              <view class='content-tab1'>
+                
+                <template is="wxParse" data="{{wxParseData:imgcontent.nodes}}" />
+              </view>
+            </scroll-view>
+          </swiper-item>
+          <swiper-item>
+            <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+              <view class='content-tab1'>
+              </view>
+            </scroll-view>
+          </swiper-item>
+        </swiper>
+      </view>
+    </view>
+    <view class='detailsbuy'>
+      <navigator class='item' bindtap="gotocart" url='../car/index'><text class='carnum' wx:if="{{carnum}}">{{carnum}}</text></navigator>
+      <view class='item2' bindtap='addcart'>加入购物车</view>
+      <view class='item3' bindtap='gocart'>立即购买</view>
+    </view>
+  </view>
+</view>

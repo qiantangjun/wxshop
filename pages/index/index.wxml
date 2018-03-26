@@ -1,0 +1,130 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='header'>
+  <navigator class='header-mess' url='../message/index'>
+    <view class='dot'></view>
+  </navigator>
+    <text>米加咚商城</text>
+    <navigator class='header-search' url='../search/index'></navigator>
+  </view>
+  <!--banner-->
+  <view class='banner' wx:if="{{imgUrls.length>0}}">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class='swiper'>
+    <block wx:for="{{imgUrls}}" wx:key="index" wx:fore-item="item">
+      <swiper-item>
+        <navigator url='{{item.linkUrl}}'>
+             <image src="{{item.picUrl}}" class="slide-image" mode='widthFix'>
+        </image>
+        </navigator>
+      </swiper-item>
+    </block>
+  </swiper>
+  </view>
+  <view class='banner' wx:else>
+    <image src='../../images/bannererror.jpg'></image>
+  </view>
+  <!--图标-->
+  <view class='index-icon' wx:if="{{nav.length>0}}">
+    <navigator class='item' url='../prolist/index?id={{item.id}}' wx:for="{{nav}}" wx:for-item="item" wx:key="index" wx:if="{{item.icon!==''&&item.level==1}}">
+      <image src='{{item.icon}}' mode='widthFix'></image>
+      <text class='text'>{{item.name}}</text>
+    </navigator>
+  </view>
+  <view class='index-icon icon2' wx:else>
+    <image src='../../images/iconerror.jpg' mode='widthFix'></image>
+  </view>
+  <!--1f-->
+  <view class='index-cell'>
+  <image src='../../images/index-icon.jpg' mode="widthFix"></image>
+   <!-- <view class='cell-left'>
+      <navigator>
+        <image src='' mode='widthFix'></image>
+      </navigator>
+    </view>
+    <view class='cell-top'>
+      <navigator url=''>
+        <image src='' mode='widthFix'></image>
+      </navigator>
+    </view>
+    <view class="cell-bottom">
+      <navigator url=''>
+        <image src='' mode='widthFix'></image>
+      </navigator>
+    </view>
+    -->
+  </view>
+  <!--2f手机-->
+  <view class='index-section'>
+    <view class='index-title'>
+      推荐商品
+    </view>
+    <view class='index-content' wx:if="{{telphone.length>0}}">
+      <navigator class='item'  url='../details/index?id={{item.id}}' wx:for="{{telphone}}" wx:for-item="item" wx:key="item.id" wx:if="{{item.recommendStatus==1}}">
+        <image src='{{item.pic}}' mode="widthFix"></image>
+        <text class='title'>{{item.name}}</text>
+        <text class='smalltitle'>{{item.characteristic}}</text>
+        <view class='price'>￥{{item.minPrice}}
+          <text class='numpi' wx:if="{{item.originalPrice>0}}">￥{{item.originalPrice}}</text>
+        </view>
+      </navigator>
+    </view>
+    <view class='index-content' wx:else>
+      <image src='../../images/indexproerror.jpg' mode='widthFix'></image>
+    </view>
+  </view>
+  <!--3f电视-->
+  <view class='index-section'>
+    <view class='index-title2'>
+      米加电视
+    </view>
+    <view class='index-content' wx:if="{{tv.length>0}}">
+      <navigator class='item' wx:for="{{tv}}" wx:for-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}' wx:if="{{item.categoryId==8490}}">
+        <image src='{{item.pic}}' mode="widthFix"></image>
+        <text class='title'>{{item.name}}</text>
+        <text class='smalltitle'>{{item.characteristic}}</text>
+        <view class='price'>￥{{item.minPrice}}
+           <text class='numpi' wx:if="{{item.originalPrice>0}}">￥{{item.originalPrice}}</text>
+        </view>
+      </navigator>
+    </view>
+    <view class='index-content' wx:else>
+      <image src='../../images/indexproerror.jpg' mode='widthFix'></image>
+    </view>
+  </view>
+  <!--4f智能-->
+  <view class='index-section'>
+    <view class='index-title3'>
+      米加电脑
+    </view>
+    <view class='index-content' wx:if="{{intel.length>0}}">
+      <navigator class='item' wx:for="{{intel}}" wx:fot-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}' wx:if="{{item.categoryId==8488}}">
+        <image src='{{item.pic}}' mode="widthFix"></image>
+        <text class='title'>{{item.name}}</text>
+         <text class='smalltitle'>{{item.characteristic}}</text>
+        <view class='price'>￥{{item.minPrice}}
+        </view>
+      </navigator>
+    </view>
+    <view class='index-content' wx:else>
+      <image src='../../images/indexproerror.jpg' mode='widthFix'></image>
+    </view>
+  </view>
+  <!--5f笔记本-->
+  <view class='index-section'>
+    <view class='index-title4'>
+      米加智能家居
+    </view>
+    <view class='index-content' wx:if="{{computer.length>0}}">
+       <navigator class='item' wx:for="{{computer}}" wx:fot-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}'  wx:if="{{item.categoryId==8489}}">
+        <image src='{{item.pic}}' mode="widthFix"></image>
+        <text class='title'>{{item.name}}</text>
+         <text class='smalltitle'>{{item.characteristic}}</text>
+        <view class='price'>￥{{item.minPrice}}
+        </view>
+      </navigator>
+    </view>
+    <view class='index-content' wx:else>
+      <image src='../../images/indexproerror.jpg' mode='widthFix'></image>
+    </view>
+  </view>
+</view>
