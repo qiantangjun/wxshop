@@ -1,0 +1,7 @@
+<!--pages/user/fpoint/index.wxml-->
+<view class='container'>
+  <view class='emptynone'>
+    <text class='span'>暂无优惠码可用</text>
+    <view class='goindex' bindtap="gotoindex">去商城逛逛吧</view>
+  </view>
+</view>

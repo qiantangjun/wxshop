@@ -1,0 +1,102 @@
+/* pages/user/coupon/index.wxss */
+
+.swiper-box {
+  width: 100%;
+}
+
+.swiper-tab {
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  border-bottom: 5px solid #f5f5f5;
+}
+
+.swiper-tab-item {
+  -webkit-flex: 1;
+  flex: 1;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+  position: relative;
+}
+
+.swiper-tab .active {
+  color: #18c7da;
+}
+
+.swiper-tab .active::after {
+  display: block;
+  content: "";
+  width: 40%;
+  height: 2px;
+  background: #18c7da;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  bottom: 0;
+}
+
+.emptynone {
+  font-size: 32rpx;
+  text-align: center;
+  color: #999;
+  margin: 80rpx 100rpx 0;
+  padding-top: 250rpx;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQoAAAEKAgMAAACXpfNaAAAAA3NCSVQICAjb4U/gAAAADFBMVEX///8AAAAAAAAAAAD4jAJNAAAABHRSTlMAESIzthWI6wAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAPiSURBVHic7ZxNdtQwDMdjeH5ddMEq5yFH6KI5B1fhRnAUjsCCBQvANJOmkw9Lf0nz75Ap8aLvdUb+WZY9/pTcNGpK/VN61GX0lPsphRH9LD2ECKlfpEiFVogQZI0IVGdhyxyCtKdMnfi/IW27hb+jVDIkZ21yrczkqk2qqy18XE+t0LmzXZEkitoVaUVJmV4RlL7LRkVarQltimhqWBXJek8yjUdACBRhkzEo0iKRDK2asKrQqhlrCkUMTYdUTZYu1OrlGKoChWwjlSplqgqoTLb9KpNWGeugq8ip/HlS9DVWRS2sNc8fsu3t04dYWrLPHqJodkyFkkFax7wuyXpWboLODnOIwh5zSEp7zCFJ+xayVa1d5hDEfeaoq+0zR13eu66v6O00RzWD1xw1xbPTHINB8CcobUv1by3SuvZuk1aybKCGtGb4Tbo1od+k23Iju7V1/QmMiEnXBUdMujYigxFplnXJsaOFpRUJjFizLItOIZM+mXHGiDXLsilizbIsuw2ZdGmD6KnRvC2CzTLPGG3aeQWiTTs3ZLRp5w2aw0do55xq9/hUPmuMbmIoTfuulJ/yt2dLat3jrpTfGmNqUa1p70v5I3/7klXtHh9KKRrjcWJ0YcZkSrV7IMbLaaAiBBiZyFBHD8CYbPnqDNA/JoY6egDGlJnA0EcgxBgNsReGPoohxph7Nwx1kkOMdGLoky1mdFdh3JkY+mSrj+tT9jfEAAsHyBia5G0xVBHIGH5uYBGEGf3NMN6X8us6DH2tDhlDu4I9g4HRHYzXYOj7H8hodsQAezl973FiPByMg3EwxpQ4jB8H4x8wwHhqYMAx+bYY+lwJGYb5lsFoSvn+XzHA2tLAwAefiGFYJ++G8aV8u5jxsXyFDLAXa+7V7f64Z4gfjI/JsK+8KUb8wmJMhnOH22JEL5LGZDmXuh4DDWSIMfyN3+Ccc++FcdkPxnKefD0G6OzqvZjtnB+t158zqx0VnCkx7z0Y9y97uY9i3K0x7vgYd42MO0/K3SvjDphxF824E2fczTN8BBi+CgyfCYrvBsOHhOHLwvCpYfj2MHyM9uIvRfH92osfG8Mnby/+hRRfSYbPJsN3lOHDyvClpfj0MnyLGT7ODF9rhs83xfec4QPP8MVnxARQYhMYMRKMWA1GzAgldoURQ8OI5WHEFFFimxgxVoxYL0bMGSX2jRGDx4gFpMQkMmIjGTGalFhRRswqI3aWEsPLiCWmxDQzYqsZMd6UWHNGzLsiKdNrope+AUB5i+CkyEba9yYC5W2GhvFGBOOtCsqbGZS3OxrGGyJrSPCY5bKKPCfC2y6NsVv8BU5kqDEIDlCOAAAAAElFTkSuQmCC) no-repeat 50% 0;
+  background-size: 200rpx 200rpx;
+}
+
+.expired {
+  margin: 20rpx 10rpx;
+}
+
+.coupon-wrap {
+  background: #d8d8d8 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACyBAMAAAAZuvgcAAAAA3NCSVQICAjb4U/gAAAAGFBMVEXS0tLb29v////k5OTt7e3X19f39/fz8/OfbxIfAAAACXBIWXMAAAsSAAALEgHS3X78AAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAAmNJREFUaIHtm0FOwzAQRb3hABaYPW6UriEyrEuBfdT6AEAV1m3vL5F6nCIQy3mVRsoc4KlyPd//Z2zXe+W6jlKtu8rK1X8Ieul80EY/C7px7UoZnR8EvXCxCcroG0GvXIyvyuj+UNbDj+i9Mlp+9iqP6HdtdH4ahnVm0Nn7TKFLAX/jD1p9843Vn5hAy4y1SSd0B5ArWl2e7KK3Bb0OAFp2iL6ETOXiMmBosBtJDbGJprbIiE76VOnG2OiTK3qZMDQAtqp84IKUcruEoeOCQxMtM6HBRgfliVpsyKkGQQPOrCpfGzD0pz65ol8CgBb3BIBR5es9hi7lvHpIP6ORwCFoJCZVNGknbYoqgK4aQizIhAb+xslOBgptLaPLAQbKk000coAJmszohFmoaGMZfdIQAL3l0BcQ1aSPrgtCZHT5rIVk9FKufGpm0BSYVT6MzGZ0YvNVNPJZK2Sq0S8gT0BwvIBec3YSPHaPEBm1OBTYrJ3EInp2AxE46jSJ++pOdiPpnmyKKrAgdYcYm6MLGvysdU+RrSofQpXNh8zRa8sQxy7/QZ8UVZvKN8/Rf6O5mPSVMHRPke2JKn6xYEgYGpw3kldPjNnJUmbRlDObM/pfNDPsDhgav5wEXoEFh4LgKBOxk1NuBN0TcczwaHBBuIwO3gkmWkaG3V0A0PO1zH/RyAEGZvQqT+QcnbM4pDG749BzRq9VNx9xA1ZaBsnogkbG6JZFFUHLAWb0rnubMLRRUbWE9r7rPGMn+7cYdwE5dh9PL2CPhFnYlEfSbQLGELfy2ngPaMj5jbT+o/HD9LKbe4/+DZY9VhaKfXTOAAAAAElFTkSuQmCC)no-repeat 0;
+  background-size: 180rpx 180rpx;
+  height: 180rpx;
+  padding-left: 200rpx;
+  position: relative;
+  color: #fff;
+  text-align: left;
+}
+
+.coupon-price {
+  position: absolute;
+  color: #333;
+  font-size: 50rpx;
+  left: 20rpx;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.coupon-price .span {
+  color: #f00;
+  display: block;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.coupon-name {
+  font-size: 32rpx;
+  padding-top: 45rpx;
+  color: #333;
+}
+
+.coupon-time {
+  font-size: 30rpx;
+  color: #333;
+  padding-top: 10rpx;
+}
+
+.coupon-desc {
+  text-align: left;
+  color: #bbb;
+  font-size: 30rpx;
+  line-height: 1.4;
+  padding: 8px;
+  border: 1px solid #dfdfdf;
+  border-top: 0;
+}

@@ -1,0 +1,15 @@
+<!--pages/prolist/index.wxml-->
+<view class='container'>
+<view class='header' wx:for="{{proname}}" wx:item="item" wx:key="item" wx:if="{{item.id}}" wx:if="{{item.id==procid}}">
+    {{item.name}}
+  </view>
+  <view class='index-content'>
+      <navigator class='item' wx:for="{{prolist}}" wx:for-item="item2" wx:for-index="index" wx:key="index" wx:if="{{item2.categoryId==procid}}" url='../details/index?id={{item2.id}}'>
+        <image src='{{item2.pic}}' mode="widthFix"></image>
+        <text class='title'>{{item2.name}}</text>
+        <text class='smalltitle'>{{item2.characteristic}}</text>
+        <view class='price'>￥{{item2.minPrice}}
+          <text class='numpi' wx:if="{{itme2.hprice.length>0}}">￥{{item2.originalPrice}}</text>
+        </view>
+      </navigator>
+    </view></view>

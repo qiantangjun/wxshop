@@ -1,0 +1,60 @@
+<!--pages/user/order/orderinfo/index.wxml-->
+<view class='container'>
+  <view class='order-data'>
+    <view class='order-d'></view>
+    <text>订单状态: {{orderinfo.statusStr}}</text>
+    <view class='telphone'>申请售后</view>
+  </view>
+  <view class='logcis'>
+    <text class='logtitl'>{{logistics.shipperName}}</text>
+    <view class='item'>
+      <text class='itemtop'>快件已到达深圳市***中心，正在派送中....</text>
+      <text class='itmbtm'>2017/12/24  09:38</text>
+    </view>
+  </view>
+  <view class='order-det' wx:for="{{goods}}" wx:key="index" wx:for-item="item">
+    <navigator url='../../../details/index?id={{item.goodsId}}'>
+      <image src='{{item.pic}}' mode='widthFix'></image>
+      <view class='orderpro'>
+        <text class='title'>{{item.goodsName}}</text>
+        <text class='price'>单价:￥{{item.amount}} 数量:{{item.number}}</text>
+        <text class='payprice'>￥{{item.amount}}</text>
+      </view>
+    </navigator>
+    <text class='orderid'>
+        {{orderinfo.statusStr}}
+        </text>
+  </view>
+  <view class='order-info'>
+  <text class='item'>订单编号：{{orderinfo.orderNumber}}</text>
+    <text class='item'>下单日期：{{orderinfo.dateAdd}}</text>
+    <text class='item'>收货地址:{{address.provinceStr}}{{address.cityStr}}{{address.areaStr}}{{address.address}}</text>
+    <text class='item'>收货人姓名:{{address.linkMan}}</text>
+    <text class='item'>手机号码:{{address.mobile}}</text>
+    <text class='item'>收货时间:不限</text>
+    <text class='item'>商品价格：{{orderinfo.amount}} 元</text>
+    <text class='item'>已优惠：0元</text>
+    <text class='item'>配送费用：{{orderinfo.amountLogistics}} 元</text>
+    <text class='item'>应付总额：{{orderinfo.amountReal}} 元</text>
+  </view>
+    <view class='order-pay' wx:if="{{orderinfo.status==0}}">
+                <view class='item left' bindtap='wxpay' data-id="{{item.id}}" data-index='{{index}}'>立即支付</view>
+                <view class='item right' data-id="{{item.id}}" data-index='{{index}}' bindtap='qxorder'>取消订单</view>
+              </view>
+              <view class='order-pay' wx:if="{{orderinfo.status==2}}">
+                <view class='item left' bindtap='sureshop' data-index='{{index}}' data-id="{{item.id}}">确认收货</view>
+                <view class='item right' bindtap="calling" data-index='{{index}}'>我要退货</view>
+              </view>
+              <view class='order-pay' wx:if="{{orderinfo.status==3}}">
+                <view class='item left' url='../evote/index' data-id="{{item.id}}" data-index='{{index}}'>去评价</view>
+                <view class='item right' bindtap="calling" data-id="{{item.id}}" data-index='{{index}}'>售后服务</view>
+              </view>
+    <!-- <view class='order-pay'>
+          <navigator class='item left'>确认收货</navigator>
+          <navigator class='item right'>我要退货</navigator>
+    </view>-->
+    <!-- <view class='order-pay'>
+          <navigator class='item left' url="../evote/index">立即评价</navigator>
+          <navigator class='item right'>售后服务</navigator>
+    </view>-->
+</view>

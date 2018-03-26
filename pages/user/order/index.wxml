@@ -1,0 +1,134 @@
+<!--pages/user/order/index.wxml-->
+<view class='container'>
+  <view class='orderlength' wx:if="{{order.length>0}}">
+    <view class='protab swiper-tab'>
+      <view class="swiper-tab-item {{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">全部订单</view>
+      <view class="swiper-tab-item {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">待付款</view>
+      <view class="swiper-tab-item {{currentTab==2 ? 'active' : ''}}" data-current="2" bindtap="swichNav">待发货</view>
+      <view class="swiper-tab-item {{currentTab==3 ? 'active' : ''}}" data-current="3" bindtap="swichNav">待收货</view>
+      <view class="swiper-tab-item {{currentTab==4 ? 'active' : ''}}" data-current="4" bindtap="swichNav">待评价</view>
+    </view>
+    <view class='order-itembox'>
+      <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+        <swiper-item>
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+            <view class='order-item' wx:for="{{order}}" wx:for-item="item" wx:key="index" id='{{item.id}}'>
+              <navigator url='orderinfo/index?id={{item.id}}'>
+                <view class='order-data'>
+                  <text class='orderdata'>订单日期：{{item.dateAdd}}</text>
+                  <text class='ordernum'>订单编号：{{item.orderNumber}}</text>
+                  <text class='orderid'>{{item.statusStr}}</text>
+                </view>
+              </navigator>
+              <view class='order-det' wx:for="{{orderlist[item.id]}}" wx:key="index" wx:for-item="item2" wx:key="index">
+                <image src='{{item2.pic}}' mode='widthFix'></image>
+                <text class='det-ti'>{{item2.goodsName}}</text>
+              </view>
+              <view class='orderprice'>共 {{item.goodsNumber}} 件商品 总金额:{{item.amountReal}} 元</view>
+              <view class='order-pay' wx:if="{{item.status==0}}">
+                <view class='item left' bindtap='wxpay' data-id="{{item.id}}" data-index='{{index}}'>立即支付</view>
+                <view class='item right' data-id="{{item.id}}" data-index='{{index}}' bindtap='qxorder'>取消订单</view>
+              </view>
+              <view class='order-pay' wx:if="{{item.status==2}}">
+                <view class='item left' bindtap='sureshop' data-index='{{index}}' data-id="{{item.id}}">确认收货</view>
+                <view class='item right' bindtap="calling" data-index='{{index}}'>我要退货</view>
+              </view>
+              <view class='order-pay' wx:if="{{item.status==3}}">
+                <view class='item left' url='../evote/index' data-id="{{item.id}}" data-index='{{index}}'>去评价</view>
+                <view class='item right' bindtap="calling" data-id="{{item.id}}" data-index='{{index}}'>售后服务</view>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+            <view class='order-item' wx:for="{{order}}" wx:for-item="item" wx:key="index" wx:if="{{item.status==0}}">
+              <navigator url='orderinfo/index'>
+                <view class='order-data'>
+                  <text class='orderdata'>订单日期：{{item.dateAdd}}</text>
+                  <text class='ordernum'>订单编号：{{item.orderNumber}}</text>
+                  <text class='orderid'>{{item.statusStr}}</text>
+                </view>
+              </navigator>
+              <view class='order-det' wx:for="{{orderlist[item.id]}}" wx:key="index" wx:for-item="item2" wx:key="index">
+                <image src='{{item2.pic}}' mode='widthFix'></image>
+                <text class='det-ti'>{{item2.goodsName}}</text>
+              </view>
+              <view class='orderprice'>共 {{item.goodsNumber}} 件商品 总金额:{{item.amountReal}} 元</view>
+              <view class='order-pay'>
+                   <view class='item left' bindtap='wxpay' id="{{item.id}}" data-id="{{item.id}}" data-index='{{index}}'>立即支付</view>
+                <view class='item right' data-id="{{item.id}}" data-index='{{index}}' bindtap='qxorder'>取消订单</view>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+            <view class='order-item' wx:for="{{order}}" wx:for-item="item" wx:key="index" wx:if="{{item.status==1}}">
+              <navigator url='orderinfo/index'>
+                <view class='order-data'>
+                  <text class='orderdata'>订单日期：{{item.dateAdd}}</text>
+                  <text class='ordernum'>订单编号：{{item.orderNumber}}</text>
+                  <text class='orderid'>{{item.statusStr}}</text>
+                </view>
+              </navigator>
+              <view class='order-det' wx:for="{{orderlist[item.id]}}" wx:key="index" wx:for-item="item2" wx:key="index">
+                <image src='{{item2.pic}}' mode='widthFix'></image>
+                <text class='det-ti'>{{item2.goodsName}}</text>
+              </view>
+              <view class='orderprice'>共 {{item.goodsNumber}} 件商品 总金额:{{item.amountReal}}</view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+            <view class='order-item' wx:for="{{order}}" wx:for-item="item" wx:key="index" wx:if="{{item.status==2}}">
+              <navigator url='orderinfo/index'>
+                <view class='order-data'>
+                  <text class='orderdata'>订单日期：{{item.dateAdd}}</text>
+                  <text class='ordernum'>订单编号：{{item.orderNumber}}</text>
+                  <text class='orderid'>{{item.statusStr}}</text>
+                </view>
+              </navigator>
+              <view class='order-det' wx:for="{{orderlist[item.id]}}" wx:key="index" wx:for-item="item2" wx:key="index">
+                <image src='{{item2.pic}}' mode='widthFix'></image>
+                <text class='det-ti'>{{item2.goodsName}}</text>
+              </view>
+              <view class='orderprice'>共 {{item.goodsNumber}} 件商品 总金额:{{item.amountReal}}</view>
+              <view class='order-pay'>
+                <view class='item left' bindtap='sureshop'data-id="{{item.id}}" data-index='{{index}}'>确认收货</view>
+                <view class='item right' bindtap="calling" data-id="{{item.id}}" data-index='{{index}}'>我要退货</view>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+            <view class='order-item' wx:for="{{order}}" wx:for-item="item" wx:key="index" wx:if="{{item.status==3}}">
+              <navigator url='orderinfo/index'>
+                <view class='order-data'>
+                  <text class='orderdata'>订单日期：{{item.dateAdd}}</text>
+                  <text class='ordernum'>订单编号：{{item.orderNumber}}</text>
+                  <text class='orderid'>{{item.statusStr}}</text>
+                </view>
+              </navigator>
+              <view class='order-det' wx:for="{{orderlist[item.id]}}" wx:key="index" wx:for-item="item2" wx:key="index">
+                <image src='{{item2.pic}}' mode='widthFix'></image>
+                <text class='det-ti'>{{item2.goodsName}}</text>
+              </view>
+              <view class='orderprice'>共 {{item.goodsNumber}} 件商品 总金额:{{item.amountReal}}</view>
+              <view class='order-pay'>
+                <view class='item left' url='../evote/index' data-id="{{item.id}}" data-index='{{index}}'>去评价</view>
+                <view class='item right' bindtap="calling" data-id="{{item.id}}" data-index='{{index}}'>售后服务</view>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+  <view wx:else class='emptynone'>
+    <text class='span'>暂无相关的订单</text>
+    <view class='goindex' bindtap="gotoindex">去商城逛逛吧</view>
+  </view>
+</view>

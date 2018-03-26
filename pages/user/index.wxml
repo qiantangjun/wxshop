@@ -1,0 +1,30 @@
+<!--pages/user/index.wxml-->
+<view class='container'>
+  <view class='user'>
+    <view class='user-img'>
+      <image src='{{userInfo.avatarUrl}}' mode='widthFix'></image>
+    </view>
+    <text class='username'>{{ userInfo.nickName  }}</text>
+    <text class='usernumber'>账号:1123444</text>
+  </view>
+  <view class='user-order'>
+    <navigator class='item' url='order/index'>
+      <image src='../../images/mine/icon_order.png' mode='widthFix'></image>我的订单
+    </navigator>
+  </view>
+  <view class='user-order'>
+    <navigator class='item' url='coupon/index'>
+      <image src='../../images/mine/icon_coupon.png' mode='widthFix'></image>我的优惠券
+    </navigator>
+  </view>
+  <view class='user-order'>
+    <navigator class='item' url='fpoint/index'>
+      <image src='../../images/mine/icon_fcode.png' mode='widthFix'></image>优惠码
+    </navigator>
+  </view>
+  <view class='user-order'>
+    <navigator class='item' url='address/index'>
+      <image src='../../images/mine/icon_setting.png' mode='widthFix'></image>设置
+    </navigator>
+  </view>
+</view>

@@ -1,0 +1,57 @@
+/* pages/user/index.wxss */
+
+.container {
+  margin: 0;
+  padding: 0;
+}
+
+.user {
+  width: 100%;
+  height: 150rpx;
+  background: #fff;
+  padding: 10rpx;
+  border-bottom: 10rpx solid #f6f6f6;
+  position: relative;
+}
+
+.user-img {
+  width: 120rpx;
+  height: 120rpx;
+  float: left;
+  margin-left: 20rpx;
+  margin-top: 17rpx;
+}
+
+.username {
+  font-size: 36rpx;
+  position: absolute;
+  left: 220rpx;
+  top: 35rpx;
+}
+
+.usernumber {
+  font-size: 30rpx;
+  position: absolute;
+  left: 220rpx;
+  top: 90rpx;
+  color: #666;
+}
+
+.user-order {
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  width: 100%;
+  border-bottom: 10rpx solid #f6f6f6;
+}
+
+.user-order image {
+  float: left;
+  width: 60rpx;
+  margin: 22rpx 20rpx 0 20rpx;
+}
+
+.user-img image {
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+}
