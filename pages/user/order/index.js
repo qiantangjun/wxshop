@@ -164,6 +164,9 @@ Page({
             wx.showToast({
               title: '取消成功',
             })
+            wx.redirectTo({
+              url: '/pages/user/order/index',
+            })
           }
         })
       }
