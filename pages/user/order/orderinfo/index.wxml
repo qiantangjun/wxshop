@@ -6,10 +6,9 @@
     <view class='telphone'>申请售后</view>
   </view>
   <view class='logcis'>
-    <text class='logtitl'>{{logistics.shipperName}}</text>
+    <text class='logtitl'>物流:  {{logistics.shipperName}}</text>
     <view class='item'>
-      <text class='itemtop'>快件已到达深圳市***中心，正在派送中....</text>
-      <text class='itmbtm'>2017/12/24  09:38</text>
+      
     </view>
   </view>
   <view class='order-det' wx:for="{{goods}}" wx:key="index" wx:for-item="item">
@@ -21,9 +20,6 @@
         <text class='payprice'>￥{{item.amount}}</text>
       </view>
     </navigator>
-    <text class='orderid'>
-        {{orderinfo.statusStr}}
-        </text>
   </view>
   <view class='order-info'>
   <text class='item'>订单编号：{{orderinfo.orderNumber}}</text>

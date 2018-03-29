@@ -24,7 +24,6 @@ Page({
           id:id
         },
         success:function(res){
-        console.log(res)
           that.setData({
             goods: res.data.data.goods,
             orderinfo: res.data.data.orderInfo,
