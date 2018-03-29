@@ -26,7 +26,7 @@ App({
               //   "content-type": "application/x-www-form-urlencoded"
               // },
                //success:function(re){
-              //  console.log(re)
+               //console.log(res)
               // }
             // })
             that.globalData.token=res.data.data.token;
