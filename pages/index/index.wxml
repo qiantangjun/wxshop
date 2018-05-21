@@ -24,6 +24,7 @@
     <image src='../../images/bannererror.jpg'></image>
   </view>
   <!--图标-->
+  <button open-type="getUserInfo" class='indexbtn'>获取用户信息</button>
   <view class='index-icon' wx:if="{{nav.length>0}}">
     <navigator class='item' url='../prolist/index?id={{item.id}}' wx:for="{{nav}}" wx:for-item="item" wx:key="index" wx:if="{{item.icon!==''&&item.level==1}}">
       <image src='{{item.icon}}' mode='widthFix'></image>

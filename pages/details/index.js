@@ -55,6 +55,7 @@ Page({
       header: { 'content-type': 'application/x-www-form-urlencoded' },
       url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/detail?id=' + options.id,
       success: function (res) {
+        console.log(res)
         that.setData({
           goodsId: res.data.data.basicInfo.id,
           bigtitle: res.data.data.basicInfo.name,
@@ -252,7 +253,7 @@ Page({
       cardetails.chosename = this.data.chosename//选中的规格名称
       cardetails.number = this.data.detailnumber//商品购买数量
       cardetails.maxnum = this.data.maxnum//商品最大购买数量
-      cardetails.logisticsType = 0
+      cardetails.logisticsType =1
       cardetails.inviter_id = 0
       var pics = this.data.detalimg
       for (var i = 0; i < pics.length; i++) {

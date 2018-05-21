@@ -4,7 +4,7 @@
     <!--搜索栏白色区  -->
     <view class='search-top-left'>
       <icon class='icon-search' type='search' size="18"></icon>
-      <input id='searchInput' class='search-input'  placeholder='搜索商品' confirm-type="search" value='{{ inputValue }}' bindconfirm="_sendSearchReq"></input>
+      <input id='searchInput' class='search-input'  placeholder='搜索商品' confirm-type="search" bindinput='searchinput'></input>
     </view>
     <!--搜索栏文字区  -->
     <view class='search-top-right'>
@@ -27,5 +27,6 @@
         </view>
       </view>
     </view>
+    <view class='nolist' wx:if="searchRetData.length<1">{{nolist}}</view>
   </view>
 </view>

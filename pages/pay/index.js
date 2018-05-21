@@ -6,7 +6,8 @@ Page({
    */
   data: {
       paygoods:[],
-      payalldetails:""
+      payalldetails:"",
+      allprice:''
   },
 
   /**
@@ -17,10 +18,17 @@ Page({
     var that = this
     var paydetails = wx.getStorageSync("paymoney")
     var paygoods=wx.getStorageSync("paygoods")
+    var allprice = JSON.parse(paydetails.goodsJsonStr)
+    var all=0
+    for(var i=0;i<allprice.length;i++){
+      all += allprice[i].price*allprice[i].number
+    }
+   console.log(all)
     //console.log(goodsJsonStr2.replace(/\[.*?\]/g, ''))
     this.setData({
       paygoods: paygoods,
-      payalldetails: paydetails
+      payalldetails: paydetails,
+      allprice:all
     })
   },
 

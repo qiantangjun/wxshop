@@ -5,7 +5,7 @@ Page {
   overflow-x: hidden;
   overflow-y: auto;
 }
-
+.nolist{text-align:center;line-height:120rpx}
 .container {
   background-color: #ebebeb;
   width: 100%;

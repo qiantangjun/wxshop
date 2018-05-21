@@ -5,20 +5,58 @@ Page({
    * 页面的初始数据
    */
   data: {
-    searchRetData:''
+    searchRetData:'',
+    inputValue:'',
+    nolist:''
   },
   _sendSearchReq: function (e) {
     var that=this
-    let value = e.detail.value;
-    let data = this.data;
+    that.setData({
+      searchRetData: '',
+      nolist: ''
+    })
+    var searchdata=[]
     wx.request({
       url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/list',
       success:function(res){
-        console.log(res)
-        that.setData({
-          searchRetData:res.data.data
-        })
+        var sdata=res.data.data
+        for(var i=0;i<sdata.length;i++){
+          if (sdata[i].id ==that.data.inputValue) {
+            searchdata.push(sdata[i])
+          } else {
+            if (
+              sdata[i].characteristic.match(that.data.inputValue)
+            ) {
+              searchdata.push(sdata[i])
+            } else {
+              if (
+                sdata[i].name.match(that.data.inputValue)
+              ) {
+                searchdata.push(sdata[i])
+              } else {
+              }
+            }
+          }
+        }
+       if(
+         searchdata.length==0
+       ){
+         that.setData({
+           nolist:"未搜索到指定商品的数据"
+         })
+       }
+       else{
+         that.setData({
+           searchRetData: searchdata
+         })
+       }
       }
+    })
+  },
+  searchinput:function(e){
+    var that=this
+    that.setData({
+      inputValue: e.detail.value
     })
   },
   /**
