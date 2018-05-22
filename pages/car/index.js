@@ -7,8 +7,6 @@ Page({
   data: {
 
     pronum: [],
-    address: [],
-    address2: [],
     num: 1,
     car: [],
     selectedAll: true,
@@ -23,59 +21,12 @@ Page({
   onShow: function (options) {
     var token = getApp().globalData.token
     var that = this
-    wx.getStorage({
-      key: 'add',
-      success: function (res) {
-        wx.request({
-          url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/user/shipping-address/detail',
-          data: { token: token, id: res.data },
-          success: function (res2) {
-            var address3 = []
-            address3.push(res2.data.data)
-            that.setData({
-              address2: address3,
-              address: []
-            })
-          }
-        })
-      },
-    })
-    wx.request({
-      url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/user/shipping-address/list',
-      data: { token: token },
-      success: function (res) {
-        if (res.data.msg == "暂无数据") {
-          that.setData({
-            address: '',
-          })
-        }
-        else {
-          var addres=res.data.data
-          for(var i=0;i<addres.length;i++){
-            if (i <1&&addres[i].isDefault==false){
-              that.setData({
-                address:[],
-                address2:res.data.data
-              })
-              }
-              else{
-              that.setData({
-                address:res.data.data,
-                address2:[]
-              })
-              }
-          }
-        }
-      }
-    })
-    var addcar=wx.getStorageSync("addcart")
-    var buycar=wx.getStorageSync("buy")
-    if(
+    var addcar = wx.getStorageSync("addcart")
+    if (
       addcar
-    )
-    {
+    ) {
       var carbox = []
-      carbox.push(addcar)
+      carbox = addcar
       for (var i = 0; i < carbox.length; i++) {
         var selected = carbox[i].selected
         carbox[i].selected = true
@@ -85,42 +36,13 @@ Page({
       })
       that.getTotalPrice()
     }
-    if(
-      buycar
-    ){
-      var carbox = []
-      carbox.push(buycar)
-      for (var i = 0; i < carbox.length; i++) {
-        var selected = carbox[i].selected
-        carbox[i].selected = true
-      }
-      that.setData({
-        car: carbox
-      })
-      that.getTotalPrice()
-    }
-    if(
-      buycar&&addcar
-    )
-    {
-      var carbox = []
-      carbox.push(buycar,addcar)
-      for (var i = 0; i < carbox.length; i++) {
-        var selected = carbox[i].selected
-        carbox[i].selected = true
-      }
-      that.setData({
-        car: carbox
-      })
-      that.getTotalPrice()
-    }
-   
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-   
+
   },
 
   /**
@@ -179,6 +101,7 @@ Page({
       car: car
     })
     this.getTotalPrice()
+    wx.setStorageSync("addcart", car)
   },
   //购物减
   subnum: function (e) {
@@ -194,6 +117,7 @@ Page({
       car: car
     })
     this.getTotalPrice()
+    wx.setStorageSync("addcart", car)
   },
   //购物车全选事件
   selectedAll: function () {
@@ -259,59 +183,24 @@ Page({
       title: '删除成功',
     })
     cars.splice(index, 1)
-    wx.clearStorage()
     this.setData({
       car: cars
     })
+    if (cars.length == 0) {
+      wx.clearStorage("addcart")
+    }
+    wx.setStorageSync("addcart", cars)
   },
+
   gopay: function () {
-    if (this.data.address2 == '') {
-      var provinceId = this.data.address[0].provinceId
-      var cityId = this.data.address[0].cityId
-      var districtId = this.data.address[0].districtId
-      var address = this.data.address[0].address
-      var linkMan = this.data.address[0].linkMan
-      var mobile = this.data.address[0].mobile
-      var code = this.data.address[0].code
-    }
-    if (
-      this.data.address == ''
-    ) {
-      var provinceId = this.data.address2[0].provinceId
-      var cityId = this.data.address2[0].cityId
-      var districtId = this.data.address2[0].districtId
-      var address = this.data.address2[0].address
-      var linkMan = this.data.address2[0].linkMan
-      var mobile = this.data.address2[0].mobile
-      var code = this.data.address2[0].code
-    }
     //记录订单
-    var payOnDelivery = 2
-    var expireMinutes = 15
-    var calculate = true
-    var remark = ""
-    var couponId = ''
-    var idcard = ''
     var token = getApp().globalData.token
     var goodsJsonStr2 = this.data.car
     var goodsJsonStr = JSON.stringify(goodsJsonStr2)
-    var postpay={}
-    postpay.token=token
+    var postpay = {}
+    postpay.token = token
     postpay.goodsJsonStr = goodsJsonStr
-    postpay.provinceId = provinceId
-    postpay.cityId = cityId
-    postpay.districtId = districtId
-    postpay.address = address
-    postpay.linkMan = linkMan
-    postpay.mobile = mobile
-    postpay.code=code
-    postpay.remark = remark
-    postpay.couponId = couponId
-    postpay.idcard = idcard
-    postpay.payOnDelivery = payOnDelivery
-    postpay.expireMinutes = expireMinutes
-    wx.setStorageSync("paymoney",postpay)
-    wx.setStorageSync("paygoods",this.data.car)
+    wx.setStorageSync("paygoods", this.data.car)
     wx.navigateTo({
       url: '../pay/index',
     })

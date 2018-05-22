@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
 }
-.indexbtn{width:100%;height:70rpx;text-align:center;line-height:70rpx;background:#f2f2f2;color:#333;border-radius:0 important;border:none important;}
+.indexbtn{width:100%;height:80rpx;text-align:center;line-height:80rpx;background:#f2f2f2;color:#333;border-radius:0 important;border:none important;font-size:32rpx;position:static}
 .header {
   width: 100%;
   height: 90rpx;

@@ -24,7 +24,8 @@ Page({
     propertyChildNames: "",
     paycar: false,
     maxnum: 0,//能购买的最大库存
-    chosebox: ''//选中的商品属性
+    chosebox: '',//选中的商品属性
+    carlist:[]
   },
   changeIndicatorDots: function (e) {
     this.setData({
@@ -55,7 +56,6 @@ Page({
       header: { 'content-type': 'application/x-www-form-urlencoded' },
       url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/detail?id=' + options.id,
       success: function (res) {
-        console.log(res)
         that.setData({
           goodsId: res.data.data.basicInfo.id,
           bigtitle: res.data.data.basicInfo.name,
@@ -76,7 +76,6 @@ Page({
           })
         } that.getchose()
       },
-
       error: function (err) {
         wx.showLoading({
           title: '数据走丢了',
@@ -260,26 +259,26 @@ Page({
         var bigpic = pics[0].pic
         cardetails.pic = bigpic //商品图片
       }
-      var num = this.data.detailnumber
-      this.setData({
-        carnum: num
-      })
       var showcar = wx.getStorageSync("addcart")
-      if (
-        cardetails.goodsId == showcar.goodsId && cardetails.propertyChildIds == showcar.propertyChildIds && cardetails.chosename == showcar.chosename
-      ) {
-        showcar.number = showcar.number + this.data.detailnumber
-        wx.setStorageSync("addcart", showcar)
-        wx.showToast({
-          title: '加入购物车成功',
-        })
+      if(showcar==undefined||showcar.length==0){
+        this.data.carlist.push(cardetails)
       }
-      else {
-        wx.setStorageSync("addcart", cardetails)
-        wx.showToast({
-          title: '加入购物车成功',
-        })
-      }
+     for (var i=0;i<showcar.length;i++) {
+     		if(showcar[i].goodsId==cardetails.goodsId&&showcar[i].propertyChildIds==cardetails.propertyChildIds){
+     			showcar[i].number=showcar[i].number+cardetails.number
+          this.data.carlist=showcar
+     			break
+     		}
+     		else{
+            showcar.push(cardetails)
+            this.data.carlist = showcar
+            break
+     		}
+     }
+     wx.setStorageSync("addcart",this.data.carlist)
+     wx.showToast({
+       title: '加入购物车成功',
+     })
     }
   },
   gocart: function () {//立即购买
@@ -294,6 +293,7 @@ Page({
       return false
     }
     else {
+      var list=[]
       var cardetails = {}
       cardetails.goodsId = this.data.goodsId//商品ID
       cardetails.title = this.data.bigtitle//商品标题
@@ -309,22 +309,11 @@ Page({
         var bigpic = pics[0].pic
         cardetails.pic = bigpic //商品图片
       }
-      var showcar = wx.getStorageSync("buy")
-      if (
-        cardetails.goodsId == showcar.goodsId && cardetails.propertyChildIds == showcar.propertyChildIds && cardetails.chosename == showcar.chosename
-      ) {
-        showcar.number = showcar.number + this.data.detailnumber
-        wx.setStorageSync("buy", showcar)
-        wx.switchTab({
-          url: '../car/index',
+      list.push(cardetails)
+      wx.setStorageSync("paygoods",list)
+        wx.navigateTo({
+          url: '../pay/index',
         })
-      }
-      else {
-        wx.setStorageSync("buy", cardetails)
-        wx.switchTab({
-          url: '../car/index',
-        })
-      }
     }
   }
 })
