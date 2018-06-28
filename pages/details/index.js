@@ -68,7 +68,6 @@ Page({
             chose: res.data.data.properties,
           })
           WxParse.wxParse('imgcontent', 'html', res.data.data.content, that, 5),
-            wx.hideLoading()
           var check = that.data.chose
           for (var i = 0; i < check.length; i++) {
             var checksize = check[i].childsCurGoods[0].checked
