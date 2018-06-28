@@ -67,7 +67,7 @@ Page({
             detalimg: res.data.data.pics,
             chose: res.data.data.properties,
           })
-          WxParse.wxParse('imgcontent', 'html', res.data.data.content, that, 5),
+          WxParse.wxParse('imgcontent', 'html', res.data.data.content, that, 5)
           var check = that.data.chose
           for (var i = 0; i < check.length; i++) {
             var checksize = check[i].childsCurGoods[0].checked
