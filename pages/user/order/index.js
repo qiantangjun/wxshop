@@ -1,8 +1,9 @@
+import ajax from '../../../utils/data'
 Page({
   data: {
     winWidth: 0,
     winHeight: 0,
-    // tab切换 
+    // tab切换
     currentTab: 0,
     order: [
 
@@ -30,24 +31,28 @@ Page({
     })
   },
   onLoad: function () {
-    wx.showLoading({
-      title: '加载中',
-    })
+
     var token = getApp().globalData.token;
     var that=this
-      wx.request({
-        url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/order/list',
-        data:{
-          token: getApp().globalData.token
-        },
-        success:function(res){
-          wx.hideLoading()    
-          that.setData({
-            order: res.data.data.orderList,
-            orderlist: res.data.data.goodsMap
-          }) 
-        }
-      })
+    var order={}
+        order.data={}
+        order.data.token=getApp().globalData.token
+        order.url="order/list"
+        order.method="GET"
+        ajax.wxdata(order,function(res){
+          if(res.data.code==0){
+            that.setData({
+              order: res.data.data.orderList,
+              orderlist: res.data.data.goodsMap
+            })
+          }
+          else{
+            that.setData({
+              order:[],
+              orderlist:{}
+            })
+          }
+        })
       wx.getSystemInfo({
         success: function (res) {
           that.setData({
@@ -114,7 +119,20 @@ Page({
       },
       method:"Post",
       success:function(res){
-        console.log(res)
+        if(res.code==0){
+          wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+          })
+        }
+        else{
+          wx.showToast({
+          title: '支付失败',
+          icon: 'success',
+          duration: 2000
+          })
+        }
       }
     })
   },
@@ -124,23 +142,31 @@ Page({
   wx.showModal({
     title: '提示',
     content: '确认收货吗',
-    success:function(rec){
-      wx.request({
-        url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/order/delivery',
-        header: {
-          'content-type': 'application/x-www-form-urlencoded'
-        },
-        method:"Post",
-        data:{
-          token: getApp().globalData.token,
-          orderId:id
-        },
-        success:function(order){
-          wx.showToast({
-            title: '确认收货成功',
-          })
-        }
-      })
+    success:function(shuer){
+      if (shuer.confirm) {
+        wx.request({
+          url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/order/delivery',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded'
+          },
+          method:"Post",
+          data:{
+            token: getApp().globalData.token,
+            orderId:id
+          },
+          success:function(order){
+            if(order.code==0){
+              wx.showToast({
+                title: '确认收货成功',
+              })
+            }
+          }
+        })
+      } else if (shuer.cancel) {
+        wx.showToast({
+          title: '取消确认收货',
+        })
+      }
     }
   })
   },//取消订单
@@ -150,25 +176,39 @@ Page({
       title: '提示',
       content: '确认取消订单吗',
       success: function (rec) {
-        wx.request({
-          url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/order/close',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          method: "Post",
-          data: {
-            token: getApp().globalData.token,
-            orderId: id
-          },
-          success: function (order) {
-            wx.showToast({
-              title: '取消成功',
-            })
-            wx.redirectTo({
-              url: '/pages/user/order/index',
-            })
-          }
-        })
+        if (rec.confirm) {
+          wx.request({
+            url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/order/close',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            method: "Post",
+            data: {
+              token: getApp().globalData.token,
+              orderId: id
+            },
+            success:function (qorder) {
+              if(qorder.code==0){
+                wx.showToast({
+                  title: '取消订单成功',
+                })
+                wx.redirectTo({
+                  url: '/pages/user/order/index',
+                })
+              }
+              else{
+                wx.showToast({
+                  title: '取消订单失败',
+                })
+              }
+            }
+          })
+    } else if (rec.cancel) {
+      wx.showToast({
+        title: '放弃',
+      })
+    }
+
       }
     })
   }

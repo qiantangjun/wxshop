@@ -7,8 +7,8 @@ Page({
    */
   data: {
     userInfo: {
-      avatarUrl: "",//用户头像  
-      nickName: "",//用户昵称  
+      avatarUrl: "",//用户头像
+      nickName: "",//用户昵称
     }
   },
 
@@ -17,8 +17,8 @@ Page({
    */
   onShow: function (options) {
     var that = this;
-    /**  
-     * 获取用户信息  
+    /**
+     * 获取用户信息
      */
     wx.getUserInfo({
       success: function (res) {
@@ -59,10 +59,15 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
-
+   onPullDownRefresh: function () {
+     wx.showNavigationBarLoading() //在标题栏中显示加载
+     //模拟加载
+     setTimeout(function () {
+       // complete
+       wx.hideNavigationBarLoading() //完成停止加载
+       wx.stopPullDownRefresh() //停止下拉刷新
+     }, 1500);
+   },
   /**
    * 页面上拉触底事件的处理函数
    */

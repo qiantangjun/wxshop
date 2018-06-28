@@ -57,7 +57,9 @@
       </view>
     </view>
     <view class='detailsbuy'>
-      <navigator class='item' bindtap="gotocart" url='../car/index'></navigator>
+      <navigator class='item' bindtap="gotocart" url='../car/index'>
+        <text class='carnum' wx:if="{{totalnum>0}}">{{totalnum}}</text>
+      </navigator>
       <view class='item2' bindtap='addcart'>加入购物车</view>
       <view class='item3' bindtap='gocart'>立即购买</view>
     </view>

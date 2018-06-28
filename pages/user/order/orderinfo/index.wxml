@@ -6,7 +6,8 @@
     <view class='telphone'>申请售后</view>
   </view>
   <view class='logcis'>
-    <text class='logtitl'>物流:  {{logistics.shipperName}}</text>
+    <text class='logtitl' wx:if="{{logistics.shipperName}}">物流:{{logistics.shipperName}}</text>
+    <text class='logtitl' wx:else>物流:无物流</text>
     <view class='item'>
       
     </view>

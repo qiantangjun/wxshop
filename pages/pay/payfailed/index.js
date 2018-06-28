@@ -26,9 +26,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
-
+  goorder() {
+    wx.redirectTo({
+      url: '../../pay/index',
+    })
+  },
+  gooindex(){
+    wx.switchTab({
+      url: '../../index/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

@@ -2,6 +2,7 @@
 
 .group {
   padding-top: 70rpx;
+  text-align:center
 }
 
 .container .text {
@@ -10,3 +11,4 @@
   padding-top: 30rpx;
   color: green;
 }
+.myorder{line-height:60rpx;width:6rem;text-align:center;background:green;font-size:28rpx;margin-top:50rpx;color:#fff}

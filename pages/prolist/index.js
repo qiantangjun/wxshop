@@ -1,4 +1,5 @@
 // pages/car/index.js
+import ajax from '../../utils/data'
 Page({
 
   /**
@@ -6,37 +7,23 @@ Page({
    */
   data: {
     prolist:[
-    ],
-    procid:'0',
-    proname:[]
+    ]
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this
-    wx.request({
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      method: 'GET',
-      url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/list',
-      success: function (res) {
-        that.setData({
-          prolist:res.data.data,
-          procid:options.id
-        })
-      }
-    })
-    wx.request({
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      data: '',
-      method: 'GET',
-      url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/category/all',
-      success: function (resus) {
-        that.setData({
-          proname: resus.data.data,
-          procid: options.id
-        })
-      }
+    var pro={}
+        pro.data={}
+        pro.data.categoryId=options.id
+        pro.url="shop/goods/list"
+        pro.method="GET"
+    ajax.wxdata(pro,function(res){
+      that.setData({
+            prolist:res.data.data,
+            procid:options.id
+          })
     })
   },
   /**
@@ -70,10 +57,15 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
-
+   onPullDownRefresh: function () {
+     wx.showNavigationBarLoading() //在标题栏中显示加载
+     //模拟加载
+     setTimeout(function () {
+       // complete
+       wx.hideNavigationBarLoading() //完成停止加载
+       wx.stopPullDownRefresh() //停止下拉刷新
+     }, 1500);
+   },
   /**
    * 页面上拉触底事件的处理函数
    */

@@ -1,9 +1,10 @@
 var WxParse = require('../wxParse/wxParse.js');
+import ajax from '../../utils/data'
 Page({
   data: {
     winWidth: 0,
     winHeight: 0,
-    // tab切换 
+    // tab切换
     currentTab: 0,
     detalimg: [],
     bigtitle: '',
@@ -25,7 +26,8 @@ Page({
     paycar: false,
     maxnum: 0,//能购买的最大库存
     chosebox: '',//选中的商品属性
-    carlist:[]
+    carlist:[],
+    totalnum:0
   },
   changeIndicatorDots: function (e) {
     this.setData({
@@ -48,40 +50,64 @@ Page({
     })
   },
   onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中',
-    })
     var that = this;
-    wx.request({
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
-      url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/detail?id=' + options.id,
-      success: function (res) {
-        that.setData({
-          goodsId: res.data.data.basicInfo.id,
-          bigtitle: res.data.data.basicInfo.name,
-          smalltitle: res.data.data.basicInfo.characteristic,
-          smallprice: res.data.data.basicInfo.minPrice,
-          bigprice: res.data.data.basicInfo.originalPrice,
-          detalimg: res.data.data.pics,
-          chose: res.data.data.properties,
-        })
-        WxParse.wxParse('imgcontent', 'html', res.data.data.content, that, 5),
-          wx.hideLoading()
-        var check = that.data.chose
-        for (var i = 0; i < check.length; i++) {
-          var checksize = check[i].childsCurGoods[0].checked
-          check[i].childsCurGoods[0].checked = true
+    that.total()
+    var wdata={}
+        wdata.data={}
+        wdata.data.id=options.id
+        wdata.url="shop/goods/detail"
+        wdata.method="GET"
+        ajax.wxdata(wdata,function(res){
           that.setData({
-            chose: check
+            goodsId: res.data.data.basicInfo.id,
+            bigtitle: res.data.data.basicInfo.name,
+            smalltitle: res.data.data.basicInfo.characteristic,
+            smallprice: res.data.data.basicInfo.minPrice,
+            bigprice: res.data.data.basicInfo.originalPrice,
+            detalimg: res.data.data.pics,
+            chose: res.data.data.properties,
           })
-        } that.getchose()
-      },
-      error: function (err) {
-        wx.showLoading({
-          title: '数据走丢了',
-        })
-      }
-    }),
+          WxParse.wxParse('imgcontent', 'html', res.data.data.content, that, 5),
+            wx.hideLoading()
+          var check = that.data.chose
+          for (var i = 0; i < check.length; i++) {
+            var checksize = check[i].childsCurGoods[0].checked
+            check[i].childsCurGoods[0].checked = true
+            that.setData({
+              chose: check
+            })
+          } that.getchose()
+        });
+    // wx.request({
+    //   header: { 'content-type': 'application/x-www-form-urlencoded' },
+    //   url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/detail?id=' + options.id,
+    //   success: function (res) {
+    //     that.setData({
+    //       goodsId: res.data.data.basicInfo.id,
+    //       bigtitle: res.data.data.basicInfo.name,
+    //       smalltitle: res.data.data.basicInfo.characteristic,
+    //       smallprice: res.data.data.basicInfo.minPrice,
+    //       bigprice: res.data.data.basicInfo.originalPrice,
+    //       detalimg: res.data.data.pics,
+    //       chose: res.data.data.properties,
+    //     })
+    //     WxParse.wxParse('imgcontent', 'html', res.data.data.content, that, 5),
+    //       wx.hideLoading()
+    //     var check = that.data.chose
+    //     for (var i = 0; i < check.length; i++) {
+    //       var checksize = check[i].childsCurGoods[0].checked
+    //       check[i].childsCurGoods[0].checked = true
+    //       that.setData({
+    //         chose: check
+    //       })
+    //     } that.getchose()
+    //   },
+    //   error: function (err) {
+    //     wx.showLoading({
+    //       title: '数据走丢了',
+    //     })
+    //   }
+    // }),
       wx.getSystemInfo({
         success: function (res) {
           that.setData({
@@ -109,14 +135,11 @@ Page({
 
   },
   bindChange: function (e) {
-
     var that = this;
-    that.setData({ currentTab: e.detail.current });
-
+    that.setData({ currentTab: e.detail.current })
   },
   //购买选择规格价格
   labelItemTap: function () {
-
   },
   clickSkuValue: function (event) {
     var that = this;
@@ -155,6 +178,16 @@ Page({
       })
     }
   },
+  total(){
+    var len = wx.getStorageSync("addcart")
+    var total=0
+    for(var i=0;i<len.length;i++){
+      total+=len[i].number
+    }
+    this.setData({
+      totalnum:total
+    })
+  },
   gotocart() {
     wx.switchTab({
       url: '../car/index',
@@ -162,7 +195,7 @@ Page({
   },
   cutnumber: function () {//数量减
     this.setData({
-      detailnumber: (this.data.detailnumber - 1 > 1) ? this.data.detailnumber - 1 : 1
+      detailnumber: (this.data.detailnumber - 1 > 1) ? this.data.detailnumber - 1 :1
     })
   },
   addnumber: function () {//数量加
@@ -198,35 +231,35 @@ Page({
         if (
           parcar
         ) {
-          wx.request({
-            url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/price',
-            data: {
-              goodsId: that.data.goodsId,
-              propertyChildIds: propertyChildIds
-            },
-            success: function (chose) {
-              if (
-                chose.data.data.stores < 1
-              ) {
-                wx.showModal({
-                  title: '提示',
-                  content: '该商品库存不足,请重新选择商品',
-                })
+          var detail={}
+              detail.data={}
+              detail.data.goodsId=that.data.goodsId
+              detail.data.propertyChildIds=propertyChildIds
+              detail.url="shop/goods/price"
+              detail.method="GET"
+              ajax.wxdata(detail,function(chose){
+                if (
+                  chose.data.data.stores < 1
+                ) {
+                  wx.showModal({
+                    title: '提示',
+                    content: '商品库存不足,请重新选择商品',
+                  })
+                  that.setData({
+                    detailnumber:0
+                  })
+                  return
+                }
+                else {
+                  that.setData({
+                    detailnumber: 1
+                  })
+                }
                 that.setData({
-                  detailnumber: 0
+                  maxnum: chose.data.data.stores,
+                  smallprice: chose.data.data.price
                 })
-              }
-              else {
-                that.setData({
-                  detailnumber: 1
-                })
-              }
-              that.setData({
-                maxnum: chose.data.data.stores,
-                smallprice: chose.data.data.price
-              })
-            }
-          })
+              });
         }
       }
     }
@@ -263,19 +296,28 @@ Page({
       if(showcar==undefined||showcar.length==0){
         this.data.carlist.push(cardetails)
       }
-     for (var i=0;i<showcar.length;i++) {
-     		if(showcar[i].goodsId==cardetails.goodsId&&showcar[i].propertyChildIds==cardetails.propertyChildIds){
-     			showcar[i].number=showcar[i].number+cardetails.number
-          this.data.carlist=showcar
-     			break
-     		}
-     		else{
-            showcar.push(cardetails)
-            this.data.carlist = showcar
-            break
-     		}
-     }
-     wx.setStorageSync("addcart",this.data.carlist)
+      else{
+        showcar.push(cardetails)
+        this.data.carlist=showcar
+      }
+      var list = this.data.carlist
+      function merge(list) {
+        var result = []
+        var cache = {}
+        list.forEach(item => {
+          var key = `id:${item.goodsId},title${item.propertyChildIds}`
+          var index = cache[key]
+          if (index !== undefined) {
+            result[index].number += item.number
+          } else {
+            result.push(Object.assign({}, item))
+            cache[key] = result.length - 1
+          }
+        })
+        return result
+      }
+      wx.setStorageSync("addcart", merge(list))
+      this.total()
      wx.showToast({
        title: '加入购物车成功',
      })
@@ -311,9 +353,9 @@ Page({
       }
       list.push(cardetails)
       wx.setStorageSync("paygoods",list)
-        wx.navigateTo({
+      wx.redirectTo({
           url: '../pay/index',
-        })
+      })
     }
   }
 })

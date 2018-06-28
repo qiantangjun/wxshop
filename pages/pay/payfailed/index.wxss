@@ -9,4 +9,6 @@
   display: block;
   padding-top: 30rpx;
   color: red;
+  text-align:center
 }
+.myorder{line-height:60rpx;width:6rem;text-align:center;background:#ff6700;font-size:28rpx;margin-top:50rpx;color:#fff}

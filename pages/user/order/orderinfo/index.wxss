@@ -79,6 +79,8 @@
   width: 720rpx;
   padding: 15rpx;
   font-size: 30rpx;
+  height:45rpx;
+  line-height:45rpx
 }
 
 .logcis text {
@@ -118,6 +120,11 @@
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   font-size: 30rpx;
+  font-size: 30rpx;
+  width:600rpx;
+   overflow: hidden;/*内容超出后隐藏*/
+text-overflow: ellipsis;/* 超出内容显示为省略号*/
+white-space: nowrap;/*文本不进行换行*/
 }
 
 .orderpro text {
@@ -127,7 +134,7 @@
 
 .orderpro  .payprice {
   position: absolute;
-  right: -265rpx;
+  right:0;
   top: 50%;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);

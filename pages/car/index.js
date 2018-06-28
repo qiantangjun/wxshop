@@ -65,10 +65,15 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
-
+   onPullDownRefresh: function () {
+     wx.showNavigationBarLoading() //在标题栏中显示加载
+     //模拟加载
+     setTimeout(function () {
+       // complete
+       wx.hideNavigationBarLoading() //完成停止加载
+       wx.stopPullDownRefresh() //停止下拉刷新
+     }, 1500);
+   },
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -176,13 +181,13 @@ Page({
       })
     }
   },
-  delecart: function (e) {//购物车删除   
+  delecart: function (e) {//购物车删除
     var index = e.currentTarget.dataset.index
     var cars = this.data.car
+    cars.splice(index, 1)
     wx.showToast({
       title: '删除成功',
     })
-    cars.splice(index, 1)
     this.setData({
       car: cars
     })
@@ -201,7 +206,7 @@ Page({
     postpay.token = token
     postpay.goodsJsonStr = goodsJsonStr
     wx.setStorageSync("paygoods", this.data.car)
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../pay/index',
     })
   }

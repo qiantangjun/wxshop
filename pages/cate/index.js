@@ -1,3 +1,4 @@
+import ajax from '../../utils/data'
 var app = getApp()
 Page({
 
@@ -21,31 +22,47 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中',
-    })
     var that = this
-      wx.request({
-        url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/category/all',
-        success: function (res) {
-          var category = [{ id: 0, name: '全部' }]
-          res.data.data.forEach(item => {
-            category.push(item)
-          })
-          that.setData({
-            categories: category
-          })
-        }
+    var wdata={}
+        wdata.data={}
+        wdata.url="shop/goods/category/all"
+        wdata.method="GET"
+        ajax.wxdata(wdata,function(res){
+              var category = [{ id: 0, name: '全部' }]
+              res.data.data.forEach(item => {
+                category.push(item)
+              })
+              that.setData({
+                categories: category
+              })
+        })
+      // wx.request({
+      //   url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/category/all',
+      //   success: function (res) {
+      //     var category = [{ id: 0, name: '全部' }]
+      //     res.data.data.forEach(item => {
+      //       category.push(item)
+      //     })
+      //     that.setData({
+      //       categories: category
+      //     })
+      //   }
+      // })
+      wdata.url="shop/goods/list"
+      ajax.wxdata(wdata,function(req){
+        that.setData({
+          goods: req.data.data
+        })
       })
-      wx.request({
-        url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/list',
-        success:function(goods){
-          wx.hideLoading()
-          that.setData({
-            goods: goods.data.data
-          })
-        }
-      })
+      // wx.request({
+      //   url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/list',
+      //   success:function(goods){
+      //     wx.hideLoading()
+      //     that.setData({
+      //       goods: goods.data.data
+      //     })
+      //   }
+      // })
   },
 
   /**
@@ -79,9 +96,15 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
+   onPullDownRefresh: function () {
+     wx.showNavigationBarLoading() //在标题栏中显示加载
+     //模拟加载
+     setTimeout(function () {
+       // complete
+       wx.hideNavigationBarLoading() //完成停止加载
+       wx.stopPullDownRefresh() //停止下拉刷新
+     }, 1500);
+   },
 
   /**
    * 页面上拉触底事件的处理函数

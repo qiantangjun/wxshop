@@ -4,7 +4,7 @@
     {{item.name}}
   </view>
   <view class='index-content'>
-      <navigator class='item' wx:for="{{prolist}}" wx:for-item="item2" wx:for-index="index" wx:key="index" wx:if="{{item2.categoryId==procid}}" url='../details/index?id={{item2.id}}'>
+      <navigator class='item' wx:for="{{prolist}}" wx:for-item="item2" wx:for-index="index" wx:key="index" url='../details/index?id={{item2.id}}'>
         <image src='{{item2.pic}}' mode="widthFix"></image>
         <text class='title'>{{item2.name}}</text>
         <text class='smalltitle'>{{item2.characteristic}}</text>

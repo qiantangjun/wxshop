@@ -1,7 +1,7 @@
 <!--pages/pay/index.wxml-->
 <view class='contianer'>
   <text class='userpayt'>购物清单</text>
-   <view class='orderaddress' wx:for="{{address}}" wx:if="{{item.isDefault==true}}" wx:for-item="item" wx:key="index"  data-index="{{index}}">
+   <view class='orderaddress' wx:for="{{address}}" wx:for-item="item" wx:key="index"  data-index="{{index}}">
     <text class='tetx'>收货信息:</text>
     <view class='addressinfo'>
       <text class='name'>{{item.linkMan}} {{item.mobile}}收</text>
@@ -15,7 +15,7 @@
     </view>
   </view>
 <view wx:if="{{address.length<1}}">
-<navigator class='addlist'  url="../user/address/choseaddress/chose">添加默认收货地址</navigator>
+<navigator class='addlist'  url="../user/address/choseaddress/chose">添加默认收货地址<text>(请勾选默认地址)</text></navigator>
   </view>
   <view class='order-det' wx:for="{{paygoods}}" wx:key="index" wx:for-item="item">
     <navigator url='../../../details/index?id={{item.goodsId}}'>
@@ -58,6 +58,6 @@
     </view>
   </view>
   <view class='paybtn' bindtap='paysuucess'>
-    微信支付
+    微信支付(暂只支持微信支付)
   </view>
 </view>

@@ -1,16 +1,10 @@
+import ajax from '../../utils/data.js'
 Page({
   data: {
     imgUrls: [
     ],
-    telphone:[
-
-    ],
     tv:[],
-    intel:[],
-    computer:[],
     nav:[],
-    isHideLoadMore:false,
-    more:'正在加载...',
     moredata:false,
     indicatorDots: true,
     autoplay: false,
@@ -38,48 +32,31 @@ Page({
     })
   },
     onLoad: function (options) {
-      wx.showLoading({
-        title: '加载中',
-      })
-    var that=this
-      wx.request({
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
-        data: '',
-        method: 'GET',
-        url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/category/all',
-        success:function(res){
-          that.setData({
-            nav:res.data.data
-          })
-        },
-      }),
-        wx.request({
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
-          data: '',
-          method: 'GET',
-          url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/banner/list',
-          success: function (res) {
-            that.setData({
-              imgUrls: res.data.data,
-
+      // wx.showLoading({
+      //   title: '加载中',
+      // })
+    var that=this;
+    var wdata={};
+    wdata.data={};
+        wdata.method="GET"
+        wdata.url="shop/goods/category/all"
+        ajax.wxdata(wdata,function(res){
+              that.setData({
+                nav:res.data.data
             })
-          },
-        }),
-        wx.request({
-        header: { 'content-type': 'application/x-www-form-urlencoded' },
-          data: '',
-          method: 'GET',
-          url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/list',
-          success: function (res) {
-            that.setData({
-              telphone: res.data.data,
-              tv: res.data.data,
-              intel:res.data.data,
-              computer:res.data.data
-            })
-            wx.hideLoading()
-          },
-        })
+        });
+          wdata.url="banner/list"
+          ajax.wxdata(wdata,function(reb){
+                that.setData({
+                  imgUrls: reb.data.data,
+                });
+          });
+          wdata.url="shop/goods/list"
+          ajax.wxdata(wdata,function(goods){
+                that.setData({
+                   tv:goods.data.data,
+                });
+          });
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载
