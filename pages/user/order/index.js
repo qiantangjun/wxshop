@@ -102,38 +102,38 @@ Page({
     })
   },
   wxpay:function(e){
-    console.log(e.target.dataset.index)
-    // var index =e.currentTarget.dataset.index
-    // var payprice = paymoney[index].amountReal
-    // var payName = paymoney[index].orderNumber
-    // wx.request({
-    //   url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/pay/wx/wxapp',
-    //   data:{
-    //     token:token,
-    //     money: payprice,
-    //     payName: payName
-    //   },
-    //   header: {
-    //     'content-type': 'application/x-www-form-urlencoded'
-    //   },
-    //   method:"Post",
-    //   success:function(res){
-    //     if(res.code==0){
-    //       wx.showToast({
-    //       title: '成功',
-    //       icon: 'success',
-    //       duration: 2000
-    //       })
-    //     }
-    //     else{
-    //       wx.showToast({
-    //       title: '支付失败',
-    //       icon: 'success',
-    //       duration: 2000
-    //       })
-    //     }
-    //   }
-    // })
+   
+    var index =e.currentTarget.dataset.index
+    var payprice = paymoney[index].amountReal
+    var payName = paymoney[index].orderNumber
+    wx.request({
+      url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/pay/wx/wxapp',
+      data:{
+        token:token,
+        money: payprice,
+        payName: payName
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method:"Post",
+      success:function(res){
+        if(res.code==0){
+          wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000
+          })
+        }
+        else{
+          wx.showToast({
+          title: '支付失败',
+          icon: 'success',
+          duration: 2000
+          })
+        }
+      }
+    })
   },
   //确认收货
   sureshop:function(e){

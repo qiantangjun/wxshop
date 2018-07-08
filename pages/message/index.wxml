@@ -8,7 +8,6 @@
           <text class='datatiem'>{{item.dateAdd}}</text>
         </navigator>
       </view>
-      <view  wx:if="message.length<1">暂无数据</view>
     </view>
   </view>
 </view>
