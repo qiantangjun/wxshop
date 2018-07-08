@@ -2,12 +2,13 @@
 <view class='container'>
   <view class='newslist'>
     <view class='newsbox'>
-      <view class='item' wx:for="{{message}}" wx:key="index" wx:for-item="item">
+      <view class='item' wx:for="{{message}}" wx:key="index" wx:for-item="item" wx:if="{{message}}">
         <navigator url='messtent/index?id={{item.id}}'>
           <text class='title'>{{item.title}}</text>
           <text class='datatiem'>{{item.dateAdd}}</text>
         </navigator>
       </view>
+      <view  wx:if="message.length<1">暂无数据</view>
     </view>
   </view>
 </view>

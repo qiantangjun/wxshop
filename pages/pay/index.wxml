@@ -60,4 +60,8 @@
   <view class='paybtn' bindtap='paysuucess'>
     微信支付(暂只支持微信支付)
   </view>
+   <view class='paybtn paysuccesbtn2' wx:if="{{address.length<1}}">
+    <navigator url="../user/address/choseaddress/chose">先添加收货地址</navigator>
+    
+  </view>
 </view>

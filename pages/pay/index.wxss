@@ -7,7 +7,7 @@
   font-size: 32rpx;
   padding-left: 15rpx;
 }
-
+.contianer .paysuccesbtn2{background:#dedede;color:#333}
 .order-det {
   width: 720rpx;
   padding: 15rpx;

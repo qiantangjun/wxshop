@@ -1,0 +1,8 @@
+/* pages/paymoney/index.wxss */
+.payimg{padding-top:100rpx;width:100%}
+.payimg .porderID{display:block;text-align:center;line-height:40rpx}
+.payimg image{width:400rpx;height:400rpx;margin:0 auto;padding-top:50rpx}
+ .waring{line-height:80rpx;color:#ff0000}
+ .contactkefu{display:block;height:100rpx;position:relative;width:100%;line-height:100rpx;font-size:32rpx;text-align: center}
+ .cBtn{position:absolute;width:100%;height:100%;top:0;left:0;display:block;opacity:0}
+ .addlist{display:block;width:300rpx;height:50rpx;background:#f06643;line-height:50rpx;text-align: center;color:#fff;font-size:30rpx}

@@ -26,7 +26,7 @@
               </view>
               <view class='orderprice'>共 {{item.goodsNumber}} 件商品 总金额:{{item.amountReal}} 元</view>
               <view class='order-pay' wx:if="{{item.status==0}}">
-                <view class='item left' bindtap='wxpay' data-id="{{item.id}}" data-index='{{index}}'>立即支付</view>
+                <view class='item left' bindtap='wxpay' data-id="{{item.id}}" data-index='{{item.orderNumber}}'>立即支付</view>
                 <view class='item right' data-id="{{item.id}}" data-index='{{index}}' bindtap='qxorder'>取消订单</view>
               </view>
               <view class='order-pay' wx:if="{{item.status==2}}">

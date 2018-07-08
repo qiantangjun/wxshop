@@ -59,7 +59,7 @@
 .header-mess .dot {
   width: 20rpx;
   height: 20rpx;
-  background: #18c7da;
+  background: #f37d6a;
   border-radius: 50%;
   position: absolute;
   left: 55rpx;
@@ -78,7 +78,7 @@
   display: -ms-flexbox;
   display: flex;
   padding-bottom: 5rpx;
-  height: 139rpx;
+  /* height: 139rpx; */
 }
 
 .index-icon image {
@@ -233,4 +233,3 @@
 .icon2 image {
   width: 100%;
 }
-

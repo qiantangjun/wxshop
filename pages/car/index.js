@@ -206,7 +206,7 @@ Page({
     postpay.token = token
     postpay.goodsJsonStr = goodsJsonStr
     wx.setStorageSync("paygoods", this.data.car)
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../pay/index',
     })
   }

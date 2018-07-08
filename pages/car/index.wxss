@@ -220,7 +220,7 @@
 }
 
 .footer-pay .item3 {
-  background: #18c7da;
+  background: #f37d6a;
   color: #fff;
   font-size: 32rpx;
 }
@@ -293,7 +293,7 @@
   height: 70rpx;
   line-height: 70rpx;
   text-align: center;
-  background: #18c7da;
+  background: #f37d6a;
   color: #fff;
   margin: 0 auto;
   font-size: 32rpx;

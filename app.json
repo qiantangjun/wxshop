@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/paymoney/index",
     "pages/logs/logs",
     "pages/cate/index",
     "pages/car/index",
@@ -20,11 +21,12 @@
     "pages/pay/payfailed/index",
     "pages/user/address/index",
     "pages/user/address/choseaddress/chose"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#18c7da",
-    "navigationBarTitleText": "小星当",
+    "navigationBarBackgroundColor": "#f37d6a",
+    "navigationBarTitleText": "小星当商城",
     "navigationBarTextStyle": "#fff",
     "enablePullDownRefresh": true,
     "backgroundColor": "#18c7da"
@@ -57,6 +59,6 @@
       }
     ],
     "color": "#333",
-    "selectedColor": "#18c7da"
+    "selectedColor": "#f37d6a"
   }
 }

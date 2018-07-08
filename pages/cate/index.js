@@ -28,6 +28,12 @@ Page({
         wdata.url="shop/goods/category/all"
         wdata.method="GET"
         ajax.wxdata(wdata,function(res){
+            if(res.data.code !==0){
+              that.setData({
+                categories:[]
+              })
+            }
+            else{
               var category = [{ id: 0, name: '全部' }]
               res.data.data.forEach(item => {
                 category.push(item)
@@ -35,6 +41,7 @@ Page({
               that.setData({
                 categories: category
               })
+            }
         })
       // wx.request({
       //   url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/category/all',

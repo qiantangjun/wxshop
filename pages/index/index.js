@@ -41,9 +41,18 @@ Page({
         wdata.method="GET"
         wdata.url="shop/goods/category/all"
         ajax.wxdata(wdata,function(res){
+          if (res.data.code !== 0){
+           
               that.setData({
-                nav:res.data.data
+                nav:[]
             })
+          }
+          else {
+
+            that.setData({
+              nav: res.data.data
+            })
+          }
         });
           wdata.url="banner/list"
           ajax.wxdata(wdata,function(reb){

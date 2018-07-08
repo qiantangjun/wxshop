@@ -16,7 +16,7 @@
   height: 70rpx;
   line-height: 70rpx;
   text-align: center;
-  background: #18c7da;
+  background: #f37d6a;
   color: #fff;
   margin: 30rpx auto 0 auto;
 }

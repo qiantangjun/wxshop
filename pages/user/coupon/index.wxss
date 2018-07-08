@@ -21,7 +21,7 @@
 }
 
 .swiper-tab .active {
-  color: #18c7da;
+  color: #f37d6a;
 }
 
 .swiper-tab .active::after {
@@ -29,7 +29,7 @@
   content: "";
   width: 40%;
   height: 2px;
-  background: #18c7da;
+  background: #f37d6a;
   position: absolute;
   left: 50%;
   -webkit-transform: translateX(-50%);

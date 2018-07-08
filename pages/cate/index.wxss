@@ -55,7 +55,7 @@
 }
 
 .type-item-on {
-  border-left: 4rpx solid #18c7da;
+  border-left: 4rpx solid #f37d6a;
   background: #fff;
 }
 

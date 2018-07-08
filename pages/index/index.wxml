@@ -4,7 +4,7 @@
   <navigator class='header-mess' url='../message/index'>
     <view class='dot'></view>
   </navigator>
-    <text>小星当商城</text>
+    <text>小星当</text>
     <navigator class='header-search' url='../search/index'></navigator>
   </view>
   <!--banner-->
@@ -56,7 +56,7 @@
   <button open-type="getUserInfo" class='indexbtn'>点击授权(必须授权才能下单)</button>
   <view class='index-section'>
     <view class='index-title'>
-      推荐商品
+      推荐零食
     </view>
     <view class='index-content' wx:if="{{tv.length>0}}">
       <navigator class='item'  url='../details/index?id={{item.id}}' wx:for="{{tv}}" wx:for-item="item" wx:key="item.id" wx:if="{{item.recommendStatus==1}}">
@@ -75,7 +75,7 @@
   <!--3f电视-->
   <view class='index-section'>
     <view class='index-title2'>
-      米加电视
+      最爱的辣条
     </view>
     <view class='index-content' wx:if="{{tv.length>0}}">
       <navigator class='item' wx:for="{{tv}}" wx:for-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}' wx:if="{{item.categoryId==8490}}">
@@ -94,7 +94,7 @@
   <!--4f智能-->
   <view class='index-section'>
     <view class='index-title3'>
-      米加电脑
+      美味的坚果
     </view>
     <view class='index-content' wx:if="{{tv.length>0}}">
       <navigator class='item' wx:for="{{tv}}" wx:fot-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}' wx:if="{{item.categoryId==8488}}">
@@ -112,7 +112,7 @@
   <!--5f笔记本-->
   <view class='index-section'>
     <view class='index-title4'>
-      米加智能家居
+      甜甜的布丁
     </view>
     <view class='index-content' wx:if="{{tv.length>0}}">
        <navigator class='item' wx:for="{{tv}}" wx:fot-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}'  wx:if="{{item.categoryId==8489}}">

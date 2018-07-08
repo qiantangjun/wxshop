@@ -80,7 +80,7 @@
 }
 
 .chose .ck {
-  background: #18c7da;
+  background: #f37d6a;
   color: #fff;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .protab .active {
-  color: #18c7da;
+  color: #f37d6a;
 }
 
 .table .tr {
@@ -175,7 +175,7 @@ background:#ff0000;color:#fff;font-size:24rpx;-webkit-border-radius:50%;border-r
 }
 
 .detailsbuy .item3 {
-  background: #18c7da;
+  background: #f37d6a;
   color: #fff;
 }
 

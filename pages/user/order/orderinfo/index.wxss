@@ -72,7 +72,7 @@
 }
 
 .order-don .red {
-  background: #18c7da;
+  background: #f37d6a;
 }
 
 .logcis {
@@ -139,7 +139,7 @@ white-space: nowrap;/*文本不进行换行*/
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
   font-size: 28rpx;
-  color: #18c7da;
+  color: #f37d6a;
 }
 
 .order-info .item {
@@ -176,7 +176,7 @@ white-space: nowrap;/*文本不进行换行*/
 }
 
 .order-pay .left {
-  background:#18c7da;
+  background:#f37d6a;
   color: #fff;
 }
 

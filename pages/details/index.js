@@ -352,7 +352,7 @@ Page({
       }
       list.push(cardetails)
       wx.setStorageSync("paygoods",list)
-      wx.redirectTo({
+      wx.navigateTo({
           url: '../pay/index',
       })
     }

@@ -6,11 +6,15 @@ function wxdata(jsdata,callback){
   var url=jsdata.url
   var method=jsdata.method
   var data=jsdata.data
+  var header=""
+  if(method=="post"){
+    header="{'content-type': 'application/x-www-form-urlencoded'}"
+  }
   wx.request({
          url: rootDocment + url,
          data: data,
          method:method,
-         header: {'Content-Type': 'application/json'},
+         heder:header,
          success: function(res){
              wx.hideLoading()
               if(res.data.code=="400"||res.data.code=="401"||res.data.code=='402'||res.data.code=='404'||res.data.code=='2000'){
