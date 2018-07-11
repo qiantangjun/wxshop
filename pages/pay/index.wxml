@@ -1,9 +1,8 @@
 <!--pages/pay/index.wxml-->
 <view class='contianer'>
-  <text class='userpayt'>购物清单</text>
    <view class='orderaddress' wx:for="{{address}}" wx:for-item="item" wx:key="index"  data-index="{{index}}">
     <text class='tetx'>收货信息:</text>
-    <view class='addressinfo'>
+    <view class='addressinfo addressBox'>
       <text class='name'>{{item.linkMan}} {{item.mobile}}收</text>
       <text class='addrs'>{{item.provinceStr}}{{item.areaStr}}{{item.address}}</text>
       <view class='icon'>
@@ -27,19 +26,21 @@
       </view>
     </navigator>
   </view>
-  <view class='orderaddress'>
-    <text class='tetx'>送货时间:</text>
+  <!-- <view class='orderaddress'>
     <view class='addressinfo'>
-      <text class='name'>不限收货时间</text>
-      <view class='icon'>
+      <text class='name'>发票抬头:</text>
+      <view class='paytime'>
+          <text class='pitem active'>无需发票</text>
+          <text class='pitem'>公司</text>
+           <text class='pitem'>个人</text>
       </view>
     </view>
-  </view>
+  </view> -->
   <view class='orderaddress'>
-    <text class='tetx'>优惠券:</text>
     <view class='addressinfo'>
-      <text class='name'>暂无优惠券</text>
-      <view class='icon'>
+      <text class='name'>支付方式:</text>
+      <view class='paytime'>
+          <text class="pitem {{item.check? 'active':''}}" wx:for="{{money}}" wx:for-item="item" data-index="{{item.index}}" bindtap='couclick' wx:key="{{item.index}}" data-pay="{{item.payOnDelivery}}">{{item.money}}</text>
       </view>
     </view>
   </view>
@@ -53,7 +54,11 @@
       <text class='right'>￥{{allprice}}</text>
     </view>
     <view class='bigprice'>
-      <text class='left'>运费:</text>
+      <text class='left'>运费(包邮):</text>
+      <text class='right'>￥0.00</text>
+    </view>
+      <view class='bigprice'>
+      <text class='left'>优惠:</text>
       <text class='right'>￥0.00</text>
     </view>
   </view>
@@ -62,6 +67,5 @@
   </view>
    <view class='paybtn paysuccesbtn2' wx:if="{{address.length<1}}">
     <navigator url="../user/address/choseaddress/chose">先添加收货地址</navigator>
-    
   </view>
 </view>

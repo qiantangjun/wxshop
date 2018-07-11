@@ -7,16 +7,16 @@
   <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
     <swiper-item>
        <scroll-view scroll-y="{{true}}" style="height:{{clientHeight?clientHeight+'px':'auto'}}">
-          <view class='emptynone'>
+          <!-- <view class='emptynone'>
             <text class='text'>暂无可用的优惠券</text>
-          </view>
+          </view> -->
        </scroll-view>
     </swiper-item>
     <swiper-item>
        <scroll-view scroll-y="{{true}}" style="height:{{clientHeight?clientHeight+'px':'auto'}}">
-           <view class='emptynone'>
+           <!-- <view class='emptynone'>
             <text class='text'>暂无过期优惠券</text>
-          </view>
+          </view> -->
        </scroll-view>
     </swiper-item>
   </swiper>

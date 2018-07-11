@@ -34,7 +34,7 @@
     <image src='../../images/iconerror.jpg' mode='widthFix'></image>
   </view>
   <!--1f-->
-  <!--<view class='index-cell'>
+  <!-- <view class='index-cell'>
   <image src='../../images/index-icon.jpg' mode="widthFix"></image>
     <view class='cell-left'>
       <navigator>
@@ -51,9 +51,15 @@
         <image src='' mode='widthFix'></image>
       </navigator>
     </view>
-  </view>-->
+  </view> -->
   <!--2f手机-->
   <button open-type="getUserInfo" class='indexbtn'>点击授权(必须授权才能下单)</button>
+  <view class="indexcoupon" wx:if="{{coupon}}">
+    <view class='couponitem' wx:for="{{coupon}}" wx:for-item="item" wx:key="index" data-id="{{item.id}}" data-money="{{item.moneyMax}}" data-max="{{item.moneyHreshold}}">
+        <text class='ctext1'>{{item.name}}</text>
+         <text class='ctext2'>满<text class='ctext3'>{{item.moneyHreshold}}</text>可用</text>
+    </view>
+  </view>
   <view class='index-section'>
     <view class='index-title'>
       推荐零食
@@ -78,7 +84,7 @@
       最爱的辣条
     </view>
     <view class='index-content' wx:if="{{tv.length>0}}">
-      <navigator class='item' wx:for="{{tv}}" wx:for-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}' wx:if="{{item.categoryId==8490}}">
+      <navigator class='item' wx:for="{{tv}}" wx:for-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}' wx:if="{{item.categoryId==17806}}">
         <image src='{{item.pic}}' mode="widthFix"></image>
         <text class='title'>{{item.name}}</text>
         <text class='smalltitle'>{{item.characteristic}}</text>
@@ -97,7 +103,7 @@
       美味的坚果
     </view>
     <view class='index-content' wx:if="{{tv.length>0}}">
-      <navigator class='item' wx:for="{{tv}}" wx:fot-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}' wx:if="{{item.categoryId==8488}}">
+      <navigator class='item' wx:for="{{tv}}" wx:fot-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}' wx:if="{{item.categoryId==17703}}">
         <image src='{{item.pic}}' mode="widthFix"></image>
         <text class='title'>{{item.name}}</text>
          <text class='smalltitle'>{{item.characteristic}}</text>
@@ -115,7 +121,7 @@
       甜甜的布丁
     </view>
     <view class='index-content' wx:if="{{tv.length>0}}">
-       <navigator class='item' wx:for="{{tv}}" wx:fot-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}'  wx:if="{{item.categoryId==8489}}">
+       <navigator class='item' wx:for="{{tv}}" wx:fot-item="item" wx:key="item.id"  url='../details/index?id={{item.id}}'  wx:if="{{item.categoryId==17705}}">
         <image src='{{item.pic}}' mode="widthFix"></image>
         <text class='title'>{{item.name}}</text>
          <text class='smalltitle'>{{item.characteristic}}</text>

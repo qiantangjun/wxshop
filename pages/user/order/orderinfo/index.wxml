@@ -35,23 +35,15 @@
     <text class='item'>应付总额：{{orderinfo.amountReal}} 元</text>
   </view>
     <view class='order-pay' wx:if="{{orderinfo.status==0}}">
-                <view class='item left' bindtap='wxpay' data-id="{{item.id}}" data-index='{{index}}'>立即支付</view>
-                <view class='item right' data-id="{{item.id}}" data-index='{{index}}' bindtap='qxorder'>取消订单</view>
+                <view class='item left' bindtap='wxpay' id="{{orderID}}" data-id="{{orderID}}"  data-money="{{amountReal}}" data-number="{{orderNumber}}">立即支付</view>
+                <view class='item right' data-id="{{orderID}}" bindtap='qxorder'>取消订单</view>
               </view>
               <view class='order-pay' wx:if="{{orderinfo.status==2}}">
-                <view class='item left' bindtap='sureshop' data-index='{{index}}' data-id="{{item.id}}">确认收货</view>
-                <view class='item right' bindtap="calling" data-index='{{index}}'>我要退货</view>
+                <view class='item left' bindtap='sureshop'  data-id="{{orderID}}">确认收货</view>
+                <view class='item right' bindtap="calling" >我要退货</view>
               </view>
               <view class='order-pay' wx:if="{{orderinfo.status==3}}">
-                <view class='item left' url='../evote/index' data-id="{{item.id}}" data-index='{{index}}'>去评价</view>
-                <view class='item right' bindtap="calling" data-id="{{item.id}}" data-index='{{index}}'>售后服务</view>
+                <view class='item left' url='../evote/index' data-id="{{orderID}}" data-index='{{index}}'>去评价</view>
+                <view class='item right' bindtap="calling" data-id="{{orderID}}" data-index='{{index}}'>售后服务</view>
               </view>
-    <!-- <view class='order-pay'>
-          <navigator class='item left'>确认收货</navigator>
-          <navigator class='item right'>我要退货</navigator>
-    </view>-->
-    <!-- <view class='order-pay'>
-          <navigator class='item left' url="../evote/index">立即评价</navigator>
-          <navigator class='item right'>售后服务</navigator>
-    </view>-->
 </view>

@@ -1,4 +1,5 @@
 // pages/user/address/choseaddress/chose.js
+import ajax from '../../../../utils/data'
 Page({
 
   /**
@@ -43,7 +44,7 @@ Page({
       })
       return
     }
-    if (mobile == '') {
+  else  if (mobile == '') {
       wx.showModal({
         title: '请输入手机号！',
         icon: 'success',
@@ -51,7 +52,7 @@ Page({
       })
       return false;
     }
-    if (mobile.length != 11) {
+    else if (mobile.length != 11) {
       wx.showModal({
         title: '手机号长度有误！',
         icon: 'success',
@@ -68,7 +69,7 @@ Page({
       })
       return false;
     }
-    if (this.data.selProvince == "请选择") {
+    else if (this.data.selProvince == "请选择") {
       wx.showModal({
         title: '提示',
         content: '请选择省份',
@@ -76,7 +77,7 @@ Page({
       })
       return
     }
-    if (this.data.selCity == "请选择") {
+    else if (this.data.selCity == "请选择") {
       wx.showModal({
         title: '提示',
         content: '请选择区域',
@@ -84,7 +85,7 @@ Page({
       })
       return
     }
-    if (this.data.selProvince == "请选择") {
+    else if (this.data.selProvince == "请选择") {
       wx.showModal({
         title: '提示',
         content: '请选择地区',
@@ -92,7 +93,7 @@ Page({
       })
       return
     }
-    if (this.data.selDistrict == "请选择") {
+    else if (this.data.selDistrict == "请选择") {
       wx.showModal({
         title: '提示',
         content: '请选择县辖区',
@@ -100,7 +101,7 @@ Page({
       })
       return
     }
-    if (address == "") {
+    else  if (address == "") {
       wx.showModal({
         title: '提示',
         content: '请填写详细地址',
@@ -108,7 +109,7 @@ Page({
       })
       return
     }
-    if (code == "") {
+    else if (code == "") {
       wx.showModal({
         title: '提示',
         content: '请填写邮编',

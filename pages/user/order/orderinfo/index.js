@@ -9,7 +9,10 @@ Page({
     goods:{},
     orderinfo:{},
     address:{},
-    logistics:{}
+    logistics:{},
+    orderNumber:'',
+    orderID:"",
+    amountReal:'0'
   },
 
   /**
@@ -29,7 +32,10 @@ Page({
               goods: res.data.data.goods,
               orderinfo: res.data.data.orderInfo,
               address: res.data.data.logistics,
-              logistics: res.data.data.logistics
+              logistics: res.data.data.logistics,
+              orderNumber: res.data.data.orderInfo.orderNumber,
+              orderID: res.data.data.goods[0].orderId,
+              amountReal: res.data.data.orderInfo.amountReal
             })
           })
       // wx.request({
@@ -100,5 +106,122 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  qxorder: function (e) {
+    console.log(e)
+    var id = e.currentTarget.dataset.id
+    wx.showModal({
+      title: '提示',
+      content: '确认取消订单吗',
+      success: function (rec) {
+        if (rec.confirm) {
+          wx.request({
+            url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/order/close',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            method: "Post",
+            data: {
+              token: getApp().globalData.token,
+              orderId: id
+            },
+            success: function (qorder) {
+
+              if (qorder.data.code == 0) {
+                wx.showToast({
+                  title: '取消订单成功',
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '/pages/user/order/index',
+                  })
+                }, 1000)
+              }
+              else {
+                wx.showToast({
+                  title: '取消订单失败',
+                })
+              }
+            }
+          })
+        } else if (rec.cancel) {
+          wx.showToast({
+            title: '放弃',
+          })
+        }
+
+      }
+    })
+  },
+  wxpay: function (e) {
+
+    var payprice = e.currentTarget.dataset.money
+    var payName = e.currentTarget.dataset.number
+    var pdata = []
+    pdata.push(payprice, payName)
+    wx.navigateTo({
+      url: '../../../paymoney/index?money=' + pdata
+    })
+    // wx.request({
+    //   url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/pay/wx/wxapp',
+    //   data:{
+    //     token:token,
+    //     money: payprice,
+    //     payName: payName
+    //   },
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded'
+    //   },
+    //   method:"Post",
+    //   success:function(res){
+    //     if(res.code==0){
+    //       wx.showToast({
+    //       title: '成功',
+    //       icon: 'success',
+    //       duration: 2000
+    //       })
+    //     }
+    //     else{
+    //       wx.showToast({
+    //       title: '支付失败',
+    //       icon: 'success',
+    //       duration: 2000
+    //       })
+    //     }
+    //   }
+    // })
+  },
+  sureshop: function (e) {
+    var id = e.currentTarget.dataset.id
+    wx.showModal({
+      title: '提示',
+      content: '确认收货吗',
+      success: function (shuer) {
+        if (shuer.confirm) {
+          wx.request({
+            url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/order/delivery',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            method: "Post",
+            data: {
+              token: getApp().globalData.token,
+              orderId: id
+            },
+            success: function (order) {
+              if (order.code == 0) {
+                wx.showToast({
+                  title: '确认收货成功',
+                })
+              }
+            }
+          })
+        } else if (shuer.cancel) {
+          wx.showToast({
+            title: '取消确认收货',
+          })
+        }
+      }
+    })
+  },
 })

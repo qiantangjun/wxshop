@@ -1,3 +1,4 @@
+import ajax from '../../../utils/data'
 // pages/user/address/index.js
 Page({
 
@@ -12,27 +13,41 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onShow: function () {
-    wx.showLoading({
-      title: '加载中',
-    })
     var token = getApp().globalData.token;
     var that = this;
-    wx.request({
-      url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/user/shipping-address/list?token='+token,
-      success:function(res){
-        if (res.data.msg=="暂无数据"){
-          that.setData({
-            address:''
+    var addata={}
+        addata.data={}
+        addata.url="user/shipping-address/list"
+        addata.method="GET"
+          addata.data.token=token
+          ajax.wxdata(addata,function(res){
+          if(res.data.code==700){
+            that.setData({
+              address:""
+            })
+          }
+          else if(res.data.code==0){
+            that.setData({
+              address:res.data.data
+            })
+          }
           })
-       }
-       else{
-          that.setData({
-            address:res.data.data
-          })
-       }
-       wx.hideLoading()
-      }
-    })
+    // wx.request({
+    //   url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/user/shipping-address/list?token='+token,
+    //   success:function(res){
+    //     if (res.data.msg=="暂无数据"){
+    //       that.setData({
+    //         address:''
+    //       })
+    //    }
+    //    else{
+    //       that.setData({
+    //         address:res.data.data
+    //       })
+    //    }
+    //    wx.hideLoading()
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

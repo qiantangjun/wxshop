@@ -27,7 +27,8 @@ Page({
     maxnum: 0,//能购买的最大库存
     chosebox: '',//选中的商品属性
     carlist:[],
-    totalnum:0
+    totalnum:0,
+    goodsId:''
   },
   changeIndicatorDots: function (e) {
     this.setData({
@@ -54,7 +55,7 @@ Page({
     that.total()
     var wdata={}
         wdata.data={}
-        wdata.data.id=options.id
+        wdata.data.id = options.id
         wdata.url="shop/goods/detail"
         wdata.method="GET"
         ajax.wxdata(wdata,function(res){
@@ -66,6 +67,7 @@ Page({
             bigprice: res.data.data.basicInfo.originalPrice,
             detalimg: res.data.data.pics,
             chose: res.data.data.properties,
+            goodsId:options.id
           })
           WxParse.wxParse('imgcontent', 'html', res.data.data.content, that, 5)
           var check = that.data.chose
@@ -77,43 +79,12 @@ Page({
             })
           } that.getchose()
         });
-    // wx.request({
-    //   header: { 'content-type': 'application/x-www-form-urlencoded' },
-    //   url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/shop/goods/detail?id=' + options.id,
-    //   success: function (res) {
-    //     that.setData({
-    //       goodsId: res.data.data.basicInfo.id,
-    //       bigtitle: res.data.data.basicInfo.name,
-    //       smalltitle: res.data.data.basicInfo.characteristic,
-    //       smallprice: res.data.data.basicInfo.minPrice,
-    //       bigprice: res.data.data.basicInfo.originalPrice,
-    //       detalimg: res.data.data.pics,
-    //       chose: res.data.data.properties,
-    //     })
-    //     WxParse.wxParse('imgcontent', 'html', res.data.data.content, that, 5),
-    //       wx.hideLoading()
-    //     var check = that.data.chose
-    //     for (var i = 0; i < check.length; i++) {
-    //       var checksize = check[i].childsCurGoods[0].checked
-    //       check[i].childsCurGoods[0].checked = true
-    //       that.setData({
-    //         chose: check
-    //       })
-    //     } that.getchose()
-    //   },
-    //   error: function (err) {
-    //     wx.showLoading({
-    //       title: '数据走丢了',
-    //     })
-    //   }
-    // }),
       wx.getSystemInfo({
         success: function (res) {
           that.setData({
             clientHeight: res.windowHeight
           });
         }
-
       });
   },
   onPullDownRefresh: function () {

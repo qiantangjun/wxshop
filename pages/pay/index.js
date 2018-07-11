@@ -8,7 +8,13 @@ Page({
     paygoods: [],
     payalldetails: "",
     allprice: '',
-    address: []
+    address: [],
+    money:[
+      { money: "在线转账", index: '1', payOnDelivery: '2' },
+      { money: "货到付款", index: '2', payOnDelivery:'1'},
+  
+    ],
+   paychose:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -18,6 +24,8 @@ Page({
     var that = this
     var pushbox = []
     var paygoods = wx.getStorageSync("paygoods")
+    var paycoupon=that.data.money
+    paycoupon[0].check=true
     if(paygoods==""){
       wx.showToast({
         title: '错误请求',
@@ -34,10 +42,11 @@ Page({
       all += pushbox[i].price * pushbox[i].number
     }
     that.address()
-   
     this.setData({
       paygoods: pushbox,
-      allprice: all
+      allprice: all,
+      money: paycoupon,
+      paychose: paycoupon[0].payOnDelivery
     })
   },
   address(){
@@ -56,6 +65,19 @@ Page({
            });
          }
        });
+  },
+  couclick:function(e){
+    var that=this
+    var index = e.currentTarget.dataset.index-1
+    var paycoupon = that.data.money
+    for (var i = 0; i < paycoupon.length;i++){
+      paycoupon[i].check = false
+    }
+    paycoupon[index].check = true
+    that.setData({
+      money: paycoupon,
+      paychose:paycoupon[index].payOnDelivery
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -83,26 +105,6 @@ Page({
   },
   create(){
     var that=this
-    // var creadata={}
-    //     creadata.url="/order/create"
-    //     creadata.method="POST"
-    //     creadata.data={}
-    //     creadata.data.linkMan=that.data.address[0].linkMan
-    //     creadata.data.mobile=that.data.address[0].mobile
-    //     creadata.data.code=that.data.address[0].code
-    //     creadata.data.provinceStr=that.data.address[0].provinceStr
-    //     creadata.data.areaStr=that.data.address[0].areaStr
-    //     creadata.data.address=that.data.address[0].address
-    //     creadata.data.provinceId=that.data.address[0].provinceId
-    //     creadata.data.cityId=that.data.address[0].cityId
-    //     creadata.data.districtId=that.data.address[0].districtId
-    //     creadata.data.cityStr= that.data.address[0].cityStr
-    //     creadata.data.goodsJsonStr=JSON.stringify(that.data.paygoods)
-    //     creadata.data.expireMinutes=120
-    //     creadata.data.token=getApp().globalData.token
-    //     ajax.wxdata(creadata,function(resd){
-
-    //     })
     wx.request({
       url: 'https://api.it120.cc/b4bc6fa88ad298e813c236857ec6f67e/order/create',
       header: {
@@ -121,7 +123,8 @@ Page({
         cityStr: that.data.address[0].cityStr,
         goodsJsonStr: JSON.stringify(that.data.paygoods),
         expireMinutes:120,
-        token: getApp().globalData.token
+        token: getApp().globalData.token,
+        payOnDelivery: that.data.paychose
       },
       method: "Post",
       success: function (resd) {
@@ -130,11 +133,16 @@ Page({
           wx.clearStorageSync()
          var pdata=[]
          pdata.push(resd.data.data.amountReal, resd.data.data.orderNumber)
-         pdata.money = resd.data.data.amountReal
-         pdata.ordernumber = resd.data.data.orderNumber
-          wx.navigateTo({
-            url: '../paymoney/index?money='+pdata
-          })
+         if (that.data.paychose==2){
+           wx.navigateTo({
+             url: '../paymoney/index?money=' + pdata
+           })
+         }
+         else if (that.data.paychose == 1){
+           wx.navigateTo({
+             url: '../user/order/index'
+           })
+         }
         }
       }
     })

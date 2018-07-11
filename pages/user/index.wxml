@@ -2,10 +2,10 @@
 <view class='container'>
   <view class='user'>
     <view class='user-img'>
-      <image src='{{userInfo.avatarUrl}}' mode='widthFix'></image>
+      <image src='{{avatarUrl}}' mode='widthFix'></image>
     </view>
-    <text class='username'>{{ userInfo.nickName  }}</text>
-    <text class='usernumber'>账号:1123444</text>
+    <text class='username'>{{nickName}}</text>
+    <text class='usernumber'>欢迎:{{nickName}}</text>
   </view>
   <view class='user-order'>
     <navigator class='item' url='order/index'>

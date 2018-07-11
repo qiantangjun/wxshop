@@ -7,6 +7,8 @@
   font-size: 32rpx;
   padding-left: 15rpx;
 }
+.orderaddress .addressBox{height:auto}
+.orderaddress .addressBox .name{width:100%}
 .contianer .paysuccesbtn2{background:#dedede;color:#333}
 .order-det {
   width: 720rpx;
@@ -31,12 +33,13 @@
   width:440rpx;
 }
 
-.orderpro text {
+.addressinfo .name {
   display: block;
-  line-height: 1.5;
+ 
   overflow: hidden;/*内容超出后隐藏*/
 text-overflow: ellipsis;/* 超出内容显示为省略号*/
 white-space: nowrap;/*文本不进行换行*/
+width:150rpx
 }
 
 .orderpro  .payprice {
@@ -54,7 +57,7 @@ white-space: nowrap;/*文本不进行换行*/
 }
 
 .orderaddress .tetx {
-  line-height: 70rpx;
+  line-height:100rpx;
   font-size: 32rpx;
   border-bottom: 1px solid #f5f5f5;
   padding-left: 15rpx;
@@ -65,12 +68,18 @@ white-space: nowrap;/*文本不进行换行*/
   width: 720rpx;
   padding: 15rpx;
   position: relative;
+  display:flex;
+  flex-wrap:wrap;
+  height:70rpx;
+  line-height:70rpx
 }
-
+.paytime{width:500rpx;display:flex;flex-wrap:wrap}
+.addressinfo .paytime .pitem{padding:0 25rpx;margin-right:20rpx;border:2rpx solid #efefef}
+.addressinfo .paytime  .active{border:2rpx solid #f37d6a;color:#f37d6a}
 .addressinfo text {
   display: block;
   font-size: 30rpx;
-  line-height: 1.5;
+
 }
 
 .addressinfo .icon {

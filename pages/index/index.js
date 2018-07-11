@@ -5,6 +5,7 @@ Page({
     ],
     tv:[],
     nav:[],
+    coupon:[],
     moredata:false,
     indicatorDots: true,
     autoplay: false,
@@ -65,6 +66,12 @@ Page({
                 that.setData({
                    tv:goods.data.data,
                 });
+          });
+          wdata.url = "discounts/coupons"
+          ajax.wxdata(wdata, function (coupon) {
+            that.setData({
+              coupon: coupon.data.data,
+            });
           });
   },
   onPullDownRefresh: function () {

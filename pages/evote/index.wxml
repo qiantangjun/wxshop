@@ -1,0 +1,78 @@
+<view class="container">
+   <view class='header'>
+    商品评价
+    <view class='header-right'>发布评价</view>
+  </view>
+  <view class='inputBox'>
+  评价
+  </view>
+  <view class='evotestar'>
+    <view class='evoteBox'>
+        综合评分
+    </view>
+    <view class='votestar'>
+        <view class='star'>
+
+        </view>
+        <view class='star'>
+            
+        </view>
+        <view class='star'>
+            
+        </view>
+        <view class='star'>
+            
+        </view>
+        <view class='star'>
+            
+        </view>
+    </view>
+  </view>
+    <view class='evotestar'>
+    <view class='evoteBox'>
+        商品符合
+    </view>
+    <view class='votestar'>
+        <view class='star'>
+
+        </view>
+        <view class='star'>
+            
+        </view>
+        <view class='star'>
+            
+        </view>
+        <view class='star'>
+            
+        </view>
+        <view class='star'>
+            
+        </view>
+    </view>
+  </view>
+      <view class='evotestar'>
+    <view class='evoteBox'>
+        快递速度
+    </view>
+    <view class='votestar'>
+        <view class='star'>
+
+        </view>
+        <view class='star'>
+            
+        </view>
+        <view class='star'>
+            
+        </view>
+        <view class='star'>
+            
+        </view>
+        <view class='star'>
+            
+        </view>
+    </view>
+  </view>
+  <view class='inputBox'>
+      <input placeholder="输入您的评价"></input>
+  </view>
+</view>
