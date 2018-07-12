@@ -14,6 +14,11 @@
       <text class='smalltitle'>{{smalltitle}}</text>
       <text class='count'></text>
       <text class='price'>￥{{smallprice}}<text class='htit' wx:if="{{bigprice}}">￥{{bigprice}}</text></text>
+      <view class='startbox' bindtap='Collection'>
+        <view class="start">
+      </view>
+      <text>收藏</text>
+      </view>
     </view>
     <view class='ctil'>已选:{{chosename}} x{{detailnumber}}</view>
     <view class='chosebox' wx:for="{{chose}}" wx:for-item="property" wx:key="property.id" wx:if="{{chose.length>0}}" data-id="{{property.id}}">
@@ -23,6 +28,7 @@
           {{item.name}}
         </view>
       </view>
+      
     </view>
     <view class='numbox'>
       <text>购买数量:</text>

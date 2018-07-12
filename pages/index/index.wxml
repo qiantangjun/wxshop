@@ -55,7 +55,7 @@
   <!--2f手机-->
   <button open-type="getUserInfo" class='indexbtn'>点击授权(必须授权才能下单)</button>
   <view class="indexcoupon" wx:if="{{coupon}}">
-    <view class='couponitem' wx:for="{{coupon}}" wx:for-item="item" wx:key="index" data-id="{{item.id}}" data-money="{{item.moneyMax}}" data-max="{{item.moneyHreshold}}">
+    <view class='couponitem' wx:for="{{coupon}}" wx:for-item="item" wx:key="index" data-id="{{item.id}}" data-money="{{item.moneyMax}}" data-max="{{item.moneyHreshold}}" bindtap='addcoupon'>
         <text class='ctext1'>{{item.name}}</text>
          <text class='ctext2'>满<text class='ctext3'>{{item.moneyHreshold}}</text>可用</text>
     </view>

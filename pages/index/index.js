@@ -43,7 +43,7 @@ Page({
         wdata.url="shop/goods/category/all"
         ajax.wxdata(wdata,function(res){
           if (res.data.code !== 0){
-           
+
               that.setData({
                 nav:[]
             })
@@ -83,4 +83,23 @@ Page({
       wx.stopPullDownRefresh() //停止下拉刷新
     }, 1500);
   },
+  addcoupon:function(e){
+   var coupoudata={}
+   coupoudata.url ="discounts/fetch"
+   coupoudata.data={}
+   coupoudata.data.token = getApp().globalData.token
+   coupoudata.data.id = e.currentTarget.dataset.id
+   ajax.wxdata(coupoudata,function(res){
+     if(res.data.code==0){
+       wx.showToast({
+         title: '领取成功',
+       })
+     }
+     else{
+       wx.showToast({
+         title:"不可重复领取",
+       })
+     }
+   })
+  }
 })

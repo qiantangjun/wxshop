@@ -28,7 +28,8 @@ Page({
     chosebox: '',//选中的商品属性
     carlist:[],
     totalnum:0,
-    goodsId:''
+    goodsId:'',
+    start:false,
   },
   changeIndicatorDots: function (e) {
     this.setData({
@@ -327,5 +328,26 @@ Page({
           url: '../pay/index',
       })
     }
+  },
+  Collection:function(){
+    var that=this
+    var colldata={}
+    colldata.url ="shop/goods/fav/add"
+    colldata.data={}
+    colldata.data.token =getApp().globalData.token
+    colldata.data.goodsId = that.data.goodsId
+    ajax.wxdata(colldata,function(res){
+     
+      if(res.data.code==0){
+        wx.showToast({
+          title: '收藏成功'
+        })
+      }
+      else{
+        wx.showToast({
+          title: res.data.msg
+        })
+      }
+    })
   }
 })

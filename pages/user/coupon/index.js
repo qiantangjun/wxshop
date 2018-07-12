@@ -1,9 +1,12 @@
+import ajax from '../../../utils/data'
 Page({
   data: {
     winWidth: 0,
     winHeight: 0,
     // tab切换
     currentTab: 0,
+    coupon:[],
+    coupou2:[]
   },
   changeIndicatorDots: function (e) {
     this.setData({
@@ -33,9 +36,37 @@ Page({
           clientHeight: res.windowHeight
         });
       }
-
     });
-
+    var coupoudata={}
+    coupoudata.url="discounts/my"
+    coupoudata.data={}
+    coupoudata.data.token= getApp().globalData.token
+    ajax.wxdata(coupoudata,function(res){
+      var coupon1=[]
+      var coupon2=[]
+      if(res.data.code==0){
+        // that.setData({
+        //   coupon:res.data.data
+        // })
+        for(var i=0;i<res.data.data.length;i++){
+          if(res.data.data[i].status==0){
+            coupon1.push(res.data.data[i])
+          }
+          else if(res.data.data[i].status==1){
+            coupon2.push(res.data.data[i])
+          }
+        }
+        that.setData({
+          coupon:coupon1,
+          coupou2:coupon2
+        })
+      }
+      else{
+        that.setData({
+          coupon: ''
+        })
+      }
+    })
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading() //在标题栏中显示加载

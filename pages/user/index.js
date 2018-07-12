@@ -1,4 +1,5 @@
 // pages/user/user.js
+import ajax from '../../utils/data'
 const app = getApp();
 Page({
 
@@ -9,6 +10,8 @@ Page({
     userInfo: {
       avatarUrl: "",//用户头像
       nickName: "",//用户昵称
+      usermoney:0,
+      account:0
     }
   },
 
@@ -27,6 +30,16 @@ Page({
           nickName: JSON.parse(res.rawData).nickName,
         })
       }
+    });
+    var moneydata={}
+    moneydata.url="user/amount"
+    moneydata.data={}
+    moneydata.data.token=getApp().globalData.token
+    ajax.wxdata(moneydata,function(rem){
+    that.setData({
+      usermoney:rem.data.data.balance,
+      account:rem.data.data.score
+    })
     })
   },
   /**

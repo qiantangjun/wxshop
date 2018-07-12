@@ -37,10 +37,16 @@
     </view>
   </view> -->
   <view class='orderaddress'>
-    <view class='addressinfo'>
+    <view class='addressinfo addressinfo2'>
       <text class='name'>支付方式:</text>
       <view class='paytime'>
           <text class="pitem {{item.check? 'active':''}}" wx:for="{{money}}" wx:for-item="item" data-index="{{item.index}}" bindtap='couclick' wx:key="{{item.index}}" data-pay="{{item.payOnDelivery}}">{{item.money}}</text>
+      </view>
+    </view>
+    <view class='addressinfo'>
+      <text class='name'>优惠券:</text>
+      <view class='paytime'>
+          <text class="pitem {{item2.check? 'active':''}}" wx:for="{{coupon}}" wx:for-item="item2" wx:for-index="index" data-index="{{index}}" wx:key="{{item2.index}}" data-id="{{item2.id}}" data-pay="{{item2.moneyHreshold}}" data-money="{{item2.money}}" bindtap='chosecoupon'>{{item2.money}}元</text>
       </view>
     </view>
   </view>
@@ -59,7 +65,7 @@
     </view>
       <view class='bigprice'>
       <text class='left'>优惠:</text>
-      <text class='right'>￥0.00</text>
+      <text class='right'>￥{{couponmoney}}</text>
     </view>
   </view>
   <view class='paybtn' bindtap='paysuucess'>

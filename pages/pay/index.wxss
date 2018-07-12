@@ -1,4 +1,5 @@
 /* pages/pay/index.wxss */
+.addressinfo2{border-bottom:.3rem solid #efefef}
 .addlist{height:70rpx;line-height:70rpx;padding-left:15rpx;font-size:32rpx}
 .addlist text{font-size:26rpx;color:#888}
 .userpayt {
@@ -35,7 +36,7 @@
 
 .addressinfo .name {
   display: block;
- 
+
   overflow: hidden;/*内容超出后隐藏*/
 text-overflow: ellipsis;/* 超出内容显示为省略号*/
 white-space: nowrap;/*文本不进行换行*/
@@ -73,7 +74,7 @@ width:150rpx
   height:70rpx;
   line-height:70rpx
 }
-.paytime{width:500rpx;display:flex;flex-wrap:wrap}
+.paytime{width:550rpx;display:flex;flex-wrap:wrap}
 .addressinfo .paytime .pitem{padding:0 25rpx;margin-right:20rpx;border:2rpx solid #efefef}
 .addressinfo .paytime  .active{border:2rpx solid #f37d6a;color:#f37d6a}
 .addressinfo text {

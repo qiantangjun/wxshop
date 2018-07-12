@@ -2,21 +2,35 @@
 <view class='container'>
    <view class='protab swiper-tab'>
     <view class="swiper-tab-item {{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">未使用</view>
-    <view class="swiper-tab-item {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">已过期</view>
+    <view class="swiper-tab-item {{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">已失效</view>
   </view>
   <swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
     <swiper-item>
        <scroll-view scroll-y="{{true}}" style="height:{{clientHeight?clientHeight+'px':'auto'}}">
-          <!-- <view class='emptynone'>
+          <view class='userCouponBox' wx:if="{{coupon.length>0}}">
+               <view class='couitem' wx:for="{{coupon}}" wx:for-item="item" wx:key="item">
+                 <view class='couitemname'>{{item.name}}</view>
+                 <view class='couitemname2'>满<text>{{item.moneyHreshold}}</text>使用</view>
+                  <view class='couitemname3'>有效期至:{{item.dateEnd}}</view>
+             </view>
+          </view>
+           <view class='emptynone' wx:if="{{coupon.length<=0}}">
             <text class='text'>暂无可用的优惠券</text>
-          </view> -->
+          </view>
        </scroll-view>
     </swiper-item>
     <swiper-item>
        <scroll-view scroll-y="{{true}}" style="height:{{clientHeight?clientHeight+'px':'auto'}}">
-           <!-- <view class='emptynone'>
-            <text class='text'>暂无过期优惠券</text>
-          </view> -->
+         <view class='userCouponBox userCouponBox2' wx:if="{{coupou2.length>0}}">
+             <view class='couitem' wx:for="{{coupou2}}" wx:for-item="item" wx:key="item">
+                 <view class='couitemname'>{{item.name}}</view>
+                 <view class='couitemname2'>满<text>{{item.moneyHreshold}}</text>使用</view>
+                  <view class='couitemname3'>有效期至:{{item.dateEnd}}</view>
+             </view>
+         </view>
+          <view class='emptynone' wx:if="{{coupou2.length<=0}}">
+           <text class='text'>暂无过期优惠券</text>
+         </view>
        </scroll-view>
     </swiper-item>
   </swiper>
