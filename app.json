@@ -1,27 +1,29 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/user/collection/index",
+    "pages/user/coupon/index",
+    "pages/details/index",
     "pages/paymoney/index",
     "pages/logs/logs",
     "pages/cate/index",
+    "pages/evote/index",
     "pages/car/index",
     "pages/user/index",
-    "pages/details/index",
     "pages/search/index",
     "pages/user/order/index",
     "pages/user/order/orderinfo/index",
-    "pages/user/fpoint/index",
-    "pages/user/coupon/index",
     "pages/prolist/index",
     "pages/message/index",
     "pages/message/messtent/index",
     "pages/user/evote/index",
-    "pages/pay/index",
     "pages/pay/paysuccess/index",
     "pages/pay/payfailed/index",
     "pages/user/address/index",
-    "pages/user/address/choseaddress/chose"
-
+    "pages/details/allevote/index",
+    "pages/user/address/choseaddress/chose",
+    "pages/pay/index"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
