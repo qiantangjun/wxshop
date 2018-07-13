@@ -12,11 +12,11 @@
       <image src='../../images/mine/icon_order.png' mode='widthFix'></image>我的订单
     </navigator>
   </view>
-  <!-- <view class='user-order'>
+  <view class='user-order'>
     <navigator class='item' url='collection/index'>
-      <image src='../../images/mine/icon_coll.png' mode='widthFix'></image>我的收藏
+      <image src='../../images/mine/icon-collection.png' mode='widthFix'></image>我的收藏
     </navigator>
-  </view> -->
+  </view>
   <view class='user-order'>
     <navigator class='item' url='coupon/index'>
       <image src='../../images/mine/icon_coupon.png' mode='widthFix'></image>我的优惠券

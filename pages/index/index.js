@@ -33,9 +33,7 @@ Page({
     })
   },
     onLoad: function (options) {
-      // wx.showLoading({
-      //   title: '加载中',
-      // })
+ 
     var that=this;
     var wdata={};
     wdata.data={};

@@ -1,2 +1,12 @@
 <!--pages/user/collection/index.wxml-->
-
+<view class='container'>
+ <view class='item' wx:for="{{collection}}" wx:for-item="item" wx:for-index="index" wx:key="index" data-id="{{item.goodsId}}" bindlongtap='delete'>
+    <navigator  url='../../details/index?id={{item.goodsId}}'>
+    <image src='{{item.pic}}' mode="widthFix"></image>
+     </navigator>
+    <view class='title'>{{item.goodsName}}</view>
+ </view>
+ <view class='emptynone' wx:if="{{!collection}}">
+     <text class='text'>暂无收藏的商品</text>
+</view>
+</view>

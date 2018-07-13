@@ -190,7 +190,7 @@ Page({
     orderdata.data.token = getApp().globalData.token
     orderdata.data.payOnDelivery = that.data.paychose
     orderdata.data.couponId=that.data.couponID
-    ajaxpost.post(orderdata, function(resd) {
+    ajaxpost.post(orderdata,function(resd) {
       if (resd.data.code == 0) {
         wx.showToast({
           title: '订单创建成功'
